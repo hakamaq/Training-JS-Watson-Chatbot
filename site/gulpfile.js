@@ -55,6 +55,8 @@ const DEFAULT_CATEGORY = 'Default';
 // trailing slash.
 const BASE_URL = args.baseUrl || 'https://example.com';
 
+console.log("Link create with baseURL",BASE_URL)
+
 // CODELABS_DIR is the directory where the actual codelabs exist on disk.
 // Despite being a constant, this can be overridden with the --codelabs-dir
 // flag.
