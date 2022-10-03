@@ -44,6 +44,9 @@ $color-tensorflow-orange: #ed8e24;
 $color-unity-grey: #222c37;
 $color-weave-green: #0f9d58;
 
+/* Custom Colours */
+$color-rest-grey: #a2a7ab;
+
 /* Mixins */
 
 @mixin codelab-card($categories, $color, $icon) {
@@ -73,6 +76,11 @@ $color-weave-green: #0f9d58;
     }
   }
 }
+
+// @include codelab-card([ "rest" ], $color-rest-grey, "rest.svg");
+@include codelab-card([ "javascript", "Javascript", "JS" ], $color-google-yellow, "js.svg");
+@include codelab-card([ "angular", "Angular" ], $color-google-red, "angular-js.svg");
+@include codelab-card([ "nodejs", "NodeJs", "NodeJS" ], $color-google-green, "nodejs.svg");
 
 /* Actual CSS classes */
 

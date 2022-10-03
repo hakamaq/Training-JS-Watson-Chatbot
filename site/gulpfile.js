@@ -38,8 +38,6 @@ const spawn = childprocess.spawn;
 const swig = require('swig-templates');
 const url = require('url');
 
-console.log("args", JSON.stringify(args))
-
 // DEFAULT_GA is the default Google Analytics tracker ID
 const DEFAULT_GA = 'UA-49880327-14';
 
@@ -425,10 +423,12 @@ const parseViewMetadata = (filepath) => {
   if (meta.sort === undefined) {
     meta.sort = meta.id === 'default' ? 'mainCategory' : 'title';
   }
-
-  if (fs.existsSync(path.resolve(dirname, 'style.css'))) {
-    meta.customStyle = `/${meta.id}/style.css`;
+  if(meta.customStyle == undefined || meta.customStyle == null){
+    if (fs.existsSync(path.resolve(dirname, 'style.css'))) {
+      meta.customStyle = `/${meta.id}/style.css`;
+    }
   }
+  
 
   const defMeta = defaultViewMetadata();
   for (let key in defMeta) {
@@ -495,7 +495,7 @@ const collectMetadata = () => {
       views[view.id] = view;
     }
 
-    const codelabFiles = glob.sync(`${CODELABS_DIR}/*/codelab.json`);
+    const codelabFiles = glob.sync(`${CODELABS_DIR}/**/codelab.json`);
     for (let i = 0; i < codelabFiles.length; i++) {
       const codelab = parseCodelabMetadata(codelabFiles[i]);
       codelabs.push(codelab);
@@ -507,7 +507,6 @@ const collectMetadata = () => {
       codelabs: codelabs,
       views: views,
     }
-    console.log("collectMetadata codelabas", codelabs)
   // }
   
   
@@ -793,7 +792,6 @@ const filterCodelabs = (view, codelabs) => {
     }
     return true;
   });
-
   // Compute distinct categories.
   var categories = {};
   for (var i in codelabs) {

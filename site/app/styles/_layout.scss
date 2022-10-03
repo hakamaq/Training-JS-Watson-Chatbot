@@ -151,3 +151,7 @@ body.fullbleed {
   -webkit-overflow-scrolling: touch;
   overflow: auto;
 }
+
+google-codelab:not([theme="minimal"]) google-codelab-step .instructions{
+  max-width: 1024px !important;
+}
