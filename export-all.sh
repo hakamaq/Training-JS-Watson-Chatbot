@@ -1,5 +1,5 @@
 #!/bin/sh
-for d in ./Day\ */
+for d in ./site/codelabs/*/
   do 
     if [$d === './site' || $d === './example-cl']; then 
       break
