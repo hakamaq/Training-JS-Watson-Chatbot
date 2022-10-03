@@ -53,7 +53,7 @@ const DEFAULT_CATEGORY = 'Default';
 // BASE_URL is the canonical base URL where the site will reside. This should
 // always include the protocol (http:// or https://) and NOT including a
 // trailing slash.
-const BASE_URL = args.baseUrl || 'https://example.com';
+const BASE_URL = args.baseUrl || 'https://hakamaq.github.io/Training-JS-Watson-Chatbot';
 
 console.log("Link create with baseURL",BASE_URL)
 

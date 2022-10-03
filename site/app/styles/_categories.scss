@@ -59,7 +59,7 @@ $color-rest-grey: #a2a7ab;
   }
 
   %icon-#{$icon} {
-    background-image: url('/images/icons/#{$icon}');
+    background-image: url('./images/icons/#{$icon}');
   }
 
   @each $category in $categories {

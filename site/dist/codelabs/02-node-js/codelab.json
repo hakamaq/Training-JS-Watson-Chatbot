@@ -3,10 +3,10 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2022-10-02T22:24:53+03:00",
-  "id": "01-node-js",
+  "updated": "2022-10-03T06:26:55+03:00",
+  "id": "02-node-js",
   "duration": 3,
-  "title": "Day 2 - Introduction to NodeJS and Javascript",
+  "title": "Introduction to NodeJS",
   "authors": "Hakam Abdelqader",
   "summary": "Summary of lab",
   "source": "README.md",
@@ -23,5 +23,5 @@
     "web"
   ],
   "feedback": "mailto:hakam.abdelqader@ibm.com",
-  "url": "01-node-js"
+  "url": "02-node-js"
 }

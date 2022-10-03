@@ -1,0 +1,22 @@
+{
+  "name": "Training-repo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "cd site && npm run serve",
+    "dist": "cd site && npm run dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hakamaq/Training-JS-Watson-Chatbot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hakamaq/Training-JS-Watson-Chatbot/issues"
+  },
+  "homepage": "https://github.com/hakamaq/Training-JS-Watson-Chatbot#readme"
+}
