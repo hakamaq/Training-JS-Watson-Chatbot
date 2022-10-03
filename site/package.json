@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "serve": "gulp serve:dist --codelabsDir=./codelabs && rm dist/codelabs && cp -r ./codelabs dist",
-    "dist": "gulp dist --codelabsDir=./codelabs && rm dist/codelabs && cp -r ./codelabs dist",
+    "dist": "gulp dist --baseUrl=https://hakamaq.github.io/Training-JS-Watson-Chatbot --codelabsDir=./codelabs && rm dist/codelabs && cp -r ./codelabs dist",
     "gulp": "gulp "
   },
   "private": true,
