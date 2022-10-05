@@ -1,5 +1,5 @@
+import { MessageSender } from './message';
 import { ChatService } from './chat.service';
-import { EventHandlerVars } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -18,9 +18,13 @@ export class AppComponent {
   //STEP 1: add the chatInputText variable
   chatInputText = "";
 
-  //STEP 2: Create the constructor
-  ngOnInit():void {
 
+  // STEP 28 Ask for user input when starting
+  user:any
+   //STEP 2: Create the constructor
+  ngOnInit():void {
+    // STEP 29 get user name at start
+    this.user = prompt("What's your name?")
   }
   //STEP 3: Function for on Change
   onChatInputChange($event: any): void{
@@ -31,7 +35,15 @@ export class AppComponent {
   onSend(input: string):void{
     console.log("OnSend", input)
     //STEP 17 add messages to the array
-    this.chatService.addMessage(input);
+
+    //STEP 30
+    const message ={
+      // STEP 32 Change message to text
+      text: input,
+      sender: this.user
+    }
+    //STEP 31 change (input) to (message)
+    this.chatService.addMessage(message);
 
     //STEP 18 clear input text
     this.chatInputText = ''

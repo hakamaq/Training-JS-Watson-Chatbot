@@ -4,7 +4,10 @@
   <!-- 16.1: Add div here -->
   <div *ngFor="let msg of messages">
     <div class="message-bubble">
-      <p class="message-text">{{msg}}</p> <!-- 16.3: add {{msg}} -->
+      <p class="message-text">
+        <!-- 35: change {{msg}} to {{msg.text}}-->
+        {{msg.text}}
+      </p> <!-- 16.3: add {{msg}} -->
     </div>
   </div><!-- 16.2: close div here -->
 
