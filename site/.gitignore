@@ -15,3 +15,7 @@ app/bower_components/jszip/lib
 app/bower_components/jszip/vendor
 app/js/bundle
 
+build/
+dist/
+.DS_Store
+app/images/.DS_Store
