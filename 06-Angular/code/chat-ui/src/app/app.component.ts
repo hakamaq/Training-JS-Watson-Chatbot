@@ -24,7 +24,6 @@ export class AppComponent {
   }
   //STEP 3: Function for on Change
   onChatInputChange($event: any): void{
-    console.log("input event", $event.target.value)
     this.chatInputText = $event.target.value;
   }
 
@@ -32,7 +31,7 @@ export class AppComponent {
   onSend(input: string):void{
     console.log("OnSend", input)
     //STEP 17 add messages to the array
-    this.chatService.addMessage(input)
+    this.chatService.addMessage(input);
 
     //STEP 18 clear input text
     this.chatInputText = ''
