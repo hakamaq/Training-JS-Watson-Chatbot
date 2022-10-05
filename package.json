@@ -18,5 +18,6 @@
   "bugs": {
     "url": "https://github.com/hakamaq/Training-JS-Watson-Chatbot/issues"
   },
-  "homepage": "https://github.com/hakamaq/Training-JS-Watson-Chatbot#readme"
+  "homepage": "https://github.com/hakamaq/Training-JS-Watson-Chatbot#readme",
+  "dependencies": {}
 }

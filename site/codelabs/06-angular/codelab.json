@@ -1,0 +1,23 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-10-05T07:24:05+03:00",
+  "id": "06-angular",
+  "duration": 10,
+  "title": "Angular Complete Crash Course",
+  "authors": "Hakam Abdelqader",
+  "summary": "Angular Introduction",
+  "source": "README.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "angular"
+  ],
+  "tags": [],
+  "feedback": "mailto:hakam.abdelqader@ibm.com",
+  "url": "06-angular"
+}

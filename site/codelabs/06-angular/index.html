@@ -1,0 +1,354 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Angular Complete Crash Course</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="06-angular"
+                  title="Angular Complete Crash Course"
+                  environment="web"
+                  feedback-link="mailto:hakam.abdelqader@ibm.com">
+    
+      <google-codelab-step label="Introduction" duration="10">
+        <p>In this codelab, you&#39;ll build a chatbot app with Angular. The completed app will feature the ability to create a watson assistant chatbot and using socketio based on the user input the watson assistant will reply with the correct response</p>
+<p>You&#39;ll build everything with Angular using Angular&#39;s powerful tooling and great browser integration.</p>
+<p>This is the app you&#39;ll be building today</p>
+<h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
+<ul>
+<li>Difference between Angular and React</li>
+<li>How to use the Angular CLI to scaffold a new project.</li>
+<li>How to use Angular components to build a user interface.</li>
+<li>How to share data in components and other parts of an app.</li>
+<li>How to use event handlers in Angular.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Angular vs React" duration="0">
+        <h2 is-upgraded>Angular</h2>
+<p>Angular is a structural framework for developing dynamic web apps developed by <strong>Google</strong>. It allows developers to use HTML as a template language and allows HTML&#39;s syntax to express the application&#39;s components briefly and clearly.</p>
+<p>It is a fully featured JavaScript framework that helps developing dynamic, single page web apps. It also supports the (MVC) programming structure.</p>
+<h2 is-upgraded>React</h2>
+<p>React is a JavaScript library developed by <strong>Facebook</strong> which allows you to build UI components. It facilitates the creation of interactive User Interfaces. It also makes the code easier to understand and launch. React Java Script framework uses server-side rendering to provide a flexible, performance-oriented solution.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Framework vs Library" duration="0">
+        <p class="image-container"><img src="img/352fa1b0559eed48.png"></p>
+<ul>
+<li>Angular and React have many similarities and many differences. One of them is that <strong>Angular</strong> is a full-fledged MVC framework and <strong>React</strong> is merely a JavaScript Library.</li>
+<li><strong>Angular</strong> is considered a framework because it offers strong opinions as to how your application should be structured.</li>
+<li><strong>React</strong>, on the other hand, gives you much more freedom. It only provides the &#34;view&#34; . Due to this, you can choose any of your own libraries as you see fit. You will end up using many independent, fast-moving libraries. Because of this, you will need to take care of the corresponding updates and migrations by yourself.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DOM vs Virtual DOM" duration="0">
+        <ul>
+<li>DOM stands for <em>Document Object Model</em> and is an abstraction of a structured text. For web developers, this text is an HTML code, and the DOM is simply called <em>HTML DOM</em>.<em>Elements</em> of HTML become <em>nodes</em> in the DOM. So, while HTML is a text, the DOM is an in-memory representation of this text.</li>
+<li>Angular opted to use a **regular DOM. **This will update the entire tree structure of HTML tags.</li>
+<li>First of all — the <strong><em>Virtual DOM</em></strong> was not invented by React, but React uses it and provides it for free.</li>
+<li>The <em>Virtual DOM</em> is an abstraction of the HTML DOM. It is lightweight and detached from the browser-specific implementation details. Since the DOM itself was already an abstraction, the virtual DOM is, in fact, an abstraction of an abstraction.</li>
+</ul>
+<p class="image-container"><img src="img/96b29257d6d24916.png"></p>
+<p class="image-container"><img src="img/a4479aae765cea55.png"></p>
+<p class="image-container"><img src="img/748df9092f5f015.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="One-way VS Two-way Binding" duration="0">
+        <p class="image-container"><img src="img/207dd2c4143b246d.png"></p>
+<ul>
+<li>Angular uses <strong>two-way binding.</strong> For example, if you change the UI element (a user input) in Angular, then the corresponding model state changes as well. Additionally, if you change the model state, then the UI element changes — hence, <strong>two-way data binding</strong>.</li>
+<li>React only has <strong>one-way binding</strong>. First, the model state is updated, and then it renders the change in the UI element. However, if you change the UI element, the model state <strong>DOES NOT</strong> change. You must figure that out for yourself. Some common ways are through <strong>callbacks</strong> or <strong>state management</strong> libraries.</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="History for the Framework and Library" duration="0">
+        <h2 is-upgraded>History of React JS</h2>
+<p>React was created by Jordan Walke in 2011 and Open sourced it in May 2013 Facebook and Instagram released React 16.0 on September 2017</p>
+<p>The latest version React Fiber was released with React 16 in September 2017. React Fiber is an ongoing implementation of Reac&#39;ts Core Algorithm.</p>
+<h2 is-upgraded>History of Angular</h2>
+<p>AngularJS was released in 2010 by Google.</p>
+<ul>
+<li>2.0 version which also called Angular 2 or just Angular was released in September 2016</li>
+<li>4.0 version was released in March 2017</li>
+<li>5.0 version was released in Nov 2017</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Components" duration="0">
+        <h3 is-upgraded>Angular</h3>
+<p>The Angular is a <strong>framework</strong> based on three layers, Models, Views, and Controllers. <strong>MVC</strong></p>
+<p>It comes with a complex and fixed structure. With Angular, the developers break down the codes into separate files, which makes it easier for them to re-use the templates and codes in other projects.</p>
+<p class="image-container"><img src="img/bf56d73b1c4d4d6.png"></p>
+<h3 is-upgraded>React</h3>
+<p>The React is a <strong>library</strong> that doesn&#39;t have a fixed format to write codes in. The code written using the React library is well structured and readable.</p>
+<p>The use of component trees allows the code to be logically structured. The library also has functional programming, which makes the component declarations declarative.</p>
+<p class="image-container"><img src="img/a4479aae765cea55.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Performance and Testing" duration="0">
+        <h2 is-upgraded>Performance</h2>
+<p>The grand barrier to performance with a JavaScript framework/library-associated website is its DOM (virtual or real).</p>
+<p>Angular&#39;s utilization of a Regular DOM causes potential performance issues, especially with many UI elements and web page information.</p>
+<p>In short, React&#39;s Virtual DOM is regarded as considerably faster than Angular&#39;s Regular DOM due to more efficient state changing and Virtual Tree updating.</p>
+<h2 is-upgraded>Testing</h2>
+<h3 is-upgraded>Angular</h3>
+<p>However, Angular takes advantage of a testing framework called <strong>Jasmine</strong>. Regardless, many developers find the output rather bloated and difficult to read.</p>
+<h3 is-upgraded>React</h3>
+<p><strong>Jest</strong>, used by Facebook to test React code, is included in every React project and requires absolutely zero configuration to use out-of-the-box.</p>
+<p>Additionally, it includes a powerful mocking library for prototype development.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Key Difference Between React and Angular" duration="0">
+        <h2 is-upgraded>Key Features of Angular</h2>
+<ul>
+<li>Built-in support for AJAX, HTTP, and Observables are just a few of Angular&#39;s highlights. There is widespread support in the community.</li>
+<li>In line with current technologies</li>
+<li>Typescript is time-saving.</li>
+<li>Coding that is more clear and concise</li>
+<li>Error-handling support has been improved.</li>
+<li>Angular CLI allows for seamless updates.</li>
+<li>Validation and forms</li>
+<li>Local CSS / shadow DOM</li>
+<li>Separation of User Interface and Business Logic</li>
+</ul>
+<p class="image-container"><img src="img/c098509ad95c6f14.png"></p>
+<h2 is-upgraded>Key Features of React</h2>
+<ul>
+<li>React&#39;s key features include the ability to use third-party libraries.</li>
+<li>Time-Saving</li>
+<li>Composability and Simplicity</li>
+<li>Facebook is fully behind you.</li>
+<li>Improved user experience and lightning-fast speed.</li>
+<li>More rapid development</li>
+<li>One-directional data binding provides code stability.</li>
+<li>Components in React</li>
+</ul>
+<h2 is-upgraded>Key Difference of Angular vs React</h2>
+<ul>
+<li>Purpose</li>
+<li>Data Binding</li>
+<li>Language</li>
+<li>UI Components</li>
+<li>Dependency Injection</li>
+<li>DOM</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Summary differences" duration="0">
+        <p class="image-container"><img src="img/4972496dac0bcb56.png"></p>
+<table>
+<tr><td colspan="1" rowspan="1"><p><strong>Angular</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>React</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Offers a complete framework to design large enterprise, progressive and single-page applications</p>
+</td><td colspan="1" rowspan="1"><p>Used as a JavaScript library to render individual UI components</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Provides advanced features like dependency injection, differential loading, lazy loading</p>
+</td><td colspan="1" rowspan="1"><p>Supports only lazy loading</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Angular is based on TypeScript</p>
+</td><td colspan="1" rowspan="1"><p>React is based on JavaScript</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Follows MVC architecture</p>
+</td><td colspan="1" rowspan="1"><p>Based on Virtual DOM</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>It can be thought of as an extension of HTML attributes</p>
+</td><td colspan="1" rowspan="1"><p>Developers can write HTML code inside a script that React renders as a component</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Provides debugging and testing functionality as a tool</p>
+</td><td colspan="1" rowspan="1"><p>React doesn&#39;t provide any in-built tool, so we have to use various tools for different types of testing</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Greater learning curve but comparatively easy to setup</p>
+</td><td colspan="1" rowspan="1"><p>An easier learning curve, however, takes time to setup</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Two-way binding wherein the model state changes as the data changes</p>
+</td><td colspan="1" rowspan="1"><p>One-way data binding, wherein the UI elements can be changed only when the model state changes</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>We cannot add a JavaScript library to the source code</p>
+</td><td colspan="1" rowspan="1"><p>Allows to add JavaScript library to the source code</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Angular CLI provides a host of tools for development and seamless updates</p>
+</td><td colspan="1" rowspan="1"><p>Since React is only for UI, it doesn&#39;t have a CLI</p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="When To Use React vs. Angular?" duration="0">
+        <p>To make optimum use of these frameworks, you need to determine your needs from the project in hand.</p>
+<ul>
+<li>If you are looking for higher productivity, a clean coding environment, and ready-to-use solutions, choose Angular.</li>
+<li>However, if you are aiming for a highly customized web application, utilize the flexibility offered by React.</li>
+</ul>
+<h2 is-upgraded>Learning Curves</h2>
+<p>The objective learning curves for both React and Angular can be understood in terms of their inherent framework-level and library-level features that create distinct complexity levels.</p>
+<p>Angular is a full-featured model-view -controller (MVC) framework whereas React is an open-source JavaScript library.</p>
+<p>The learning curve for Angular is relatively high with React possessing a low learning curve that is initially difficult to grasp.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Angular Introduction" duration="0">
+        <p>These tutorials will help you learn the essentials of the latest version of Angular, starting from the basics to the advanced level.</p>
+<h2 is-upgraded>Environment Setup</h2>
+<h2 is-upgraded>New day, new folder</h2>
+<p>To start off with angular we need to create an empty folder that will host our chatbot and the assets we will create.</p>
+<pre><code language="language-sh" class="language-sh">mkdir Day-4-Angular
+</code></pre>
+<h2 is-upgraded>Install the Angular CLI</h2>
+<p>Once all of your dependencies are configured, you can install the Angular CLI from a command-line window on your computer:</p>
+<pre><code language="language-sh" class="language-sh">npm install -g @angular/cli
+</code></pre>
+<p>To confirm that your configuration is correct, run this command from your computer&#39;s command line:</p>
+<pre><code>ng version
+</code></pre>
+<p>If the command works successfully, you&#39;ll find a message similar to the screenshot below.</p>
+<p class="image-container"><img alt="Angular CLI output displaying the angular version" src="img/1ce94f414bdc567c.png"></p>
+<pre><code language="language-sh" class="language-sh"># Getting help in Angular CLI
+$ ng help
+</code></pre>
+<h2 is-upgraded>Get Started with Angular Bootstrap code</h2>
+<p>The code for this codelab contains the intermediate steps. To get started, follow the steps below:</p>
+<pre><code language="language-sh" class="language-sh"># Creating angular application
+# ng new &lt;project-name&gt; --skip-install
+$ ng new chat-ui
+</code></pre>
+<p>Angular will ask you if you want to include routing skip that as our chatbot does not include multiple pages</p>
+<pre><code language="language-sh" class="language-sh">? Would you like to add Angular routing? (y/N) N
+</code></pre>
+<p>Next Angular will ask what type of styling you would use select <code>CSS</code>.</p>
+<pre><code language="language-sh" class="language-sh">❯ CSS 
+  SCSS   [ https://sass-lang.com/documentation/syntax#scss                ] 
+  Sass   [ https://sass-lang.com/documentation/syntax#the-indented-syntax ] 
+  Less   [ http://lesscss.org                                             ] 
+</code></pre>
+<h2 is-upgraded>Check your project</h2>
+<p>Angular will now install the node_modules needed for the application and create the folder structure and creates all the files you need to get started. Once the installation is done run the command</p>
+<pre><code language="language-sh" class="language-sh">$ cd chat-ui
+$ ng serve --open 
+</code></pre>
+<p class="image-container"><img src="img/b9274ee47d866057.png"></p>
+<p>The <code>ng serve</code> command keep watching source files, so if you make any changes in any file of the project, it will rebuild it and refresh the browser automatically to reflect the changes.</p>
+<p>To stop the automatic build process, press <code>Ctrl + c / CMD + c</code> in the terminal of VS Code.</p>
+<p>Thus, you can create a workspace and an initial Angular project and run it using VS Code.</p>
+<h2 is-upgraded>To build for production</h2>
+<pre><code language="language-sh" class="language-sh"># to build application 
+$ ng build
+
+# create dist folder which will go for production
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Folder structure" duration="0">
+        <h2 is-upgraded>Configuration files</h2>
+<ul>
+<li>angular.json -&gt; Angular</li>
+<li>package.json -&gt; Node</li>
+<li>tsconfig.json -&gt; TypeScript</li>
+<li>tslint.json -&gt; Linting</li>
+</ul>
+<h2 is-upgraded>Files in dist folder (after running ng build cmd)</h2>
+<ul>
+<li>runtime.js -&gt; This is for webpack runtime</li>
+<li>polyfill.js -&gt; Helps to run new ES version javascript in old browser which does not support them</li>
+<li>vendor.js -&gt; Actual project code (component, modules, model)</li>
+<li>main.js -&gt; Points first module</li>
+<li>style.js -&gt; all css code</li>
+</ul>
+<p>Angular is a SPA framework, and a view is made of one or more component. An Angular component represents a portion of a view.</p>
+<p>Generally, an interactive web page is made of HTML, CSS, and JavaScript. Angular component is no different.</p>
+<p>Angular Component = HTML Template + Component Class + Component Metadata</p>
+<h2 is-upgraded>HTML Template</h2>
+<p>HTML template is nothing but a regular HTML code with additional Angular specific syntax to communicate with the component class.</p>
+<h2 is-upgraded>Class</h2>
+<p>Essentially, a component class is a TypeScript class that includes properties and methods. Properties store data and methods include the logic for the component. Eventually, this class will be compiled into JavaScript.</p>
+<aside class="special"><p>TypeScript is an open-source, object-oriented language developed and maintained by Microsoft. It is a typed superset of JavaScript that compiles to plain JavaScript.</p>
+</aside>
+<h2 is-upgraded>Metadata</h2>
+<p>Metadata is some extra data for a component used by Angular API to execute the component, such as the location of HTML and CSS files of the component, selector, providers, etc.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create your first component" duration="0">
+        <p>Components are the core building blocks for Angular apps. Components are like lego pieces they are small segments of code that make up entire application or if we are building legos the whole lego model</p>
+<p>Components have 3 main aspects:</p>
+<ul>
+<li>An HTML file for the template.</li>
+<li>A CSS file for the styles.</li>
+<li>A TypeScript file for the behavior of the app.</li>
+</ul>
+<p>The first component you&#39;re going to update is <code>AppComponent</code>.</p>
+<ol type="1">
+<li>Open <code>app.component.html</code> in your code editor; this is the template file for the <code>AppComponent</code>.</li>
+<li>Delete all the code in this file and replace it with this:</li>
+</ol>
+<pre><code language="language-html" class="language-html">&lt;main&gt;
+  &lt;header&gt;Chat bot&lt;/header&gt;
+  &lt;section&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Generate Component" duration="0">
+        <p>You can create files for a component manually or using the Angular CLI command. Angular CLI reduces the development time. So, let&#39;s use Angular CLI to create a new component.</p>
+<p>Use the following CLI command to generate a component.</p>
+<pre><code language="language-sh" class="language-sh">ng generate component messages
+</code></pre>
+<p class="image-container"><img src="img/aafb8132bbc83da6.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

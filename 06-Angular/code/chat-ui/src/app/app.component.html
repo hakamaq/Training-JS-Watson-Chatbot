@@ -1,0 +1,19 @@
+<main>
+  <header class="messager-header">Chat bot</header>
+  <section class="messager-chat">
+    <app-messages text=""></app-messages>
+    <div class="messager-inputarea">
+      <input
+        type="text"
+        class="messager-input"
+        (input)="onChatInputChange($event)"
+        [value]="chatInputText"
+        placeholder="Type your message here..."
+        name="user_input"
+      />
+      <button (click)="onSend(chatInputText)" class="messager-send-btn">
+        Send
+      </button>
+    </div>
+  </section>
+</main>
