@@ -41,7 +41,7 @@ React is a JavaScript library developed by **Facebook** which allows you to buil
 <!-- ------------------------ -->
 ## Framework vs Library
 
-![](2022-10-05-07-18-24.png)
+![](./images/2022-10-05-07-18-24.png)
 
 
 * Angular and React have many similarities and many differences. One of them is that **Angular** is a full-fledged MVC framework and **React** is merely a JavaScript Library.
@@ -56,15 +56,15 @@ React is a JavaScript library developed by **Facebook** which allows you to buil
 * The *Virtual DOM* is an abstraction of the HTML DOM. It is lightweight and detached from the browser-specific implementation details. Since the DOM itself was already an abstraction, the virtual DOM is, in fact, an abstraction of an abstraction.
 
 
-![](2022-10-05-07-13-57.png)
+![](./images/2022-10-05-07-13-57.png)
 
-![](2022-10-05-07-13-39.png)
+![](./images/2022-10-05-07-13-39.png)
 
-![](2022-10-05-07-13-08.png)
+![](./images/2022-10-05-07-13-08.png)
 
 ## One-way VS Two-way Binding
 
-![](2022-10-05-07-15-40.png)
+![](./images/2022-10-05-07-15-40.png)
 
 
 * Angular uses **two-way binding.** For example, if you change the UI element (a user input) in Angular, then the corresponding model state changes as well. Additionally, if you change the model state, then the UI element changes — hence, **two-way data binding**.
@@ -97,14 +97,14 @@ The Angular is a **framework** based on three layers, Models, Views, and Control
 
 It comes with a complex and fixed structure. With Angular, the developers break down the codes into separate files, which makes it easier for them to re-use the templates and codes in other projects.
 
-![](2022-10-05-07-10-50.png)
+![](./images/2022-10-05-07-10-50.png)
 
 #### React
 The React is a **library** that doesn’t have a fixed format to write codes in. The code written using the React library is well structured and readable. 
 
 The use of component trees allows the code to be logically structured. The library also has functional programming, which makes the component declarations declarative.
 
-![](2022-10-05-07-12-10.png)
+![](./images/2022-10-05-07-12-10.png)
 
 
 <!-- ------------------------ -->
@@ -155,7 +155,7 @@ Additionally, it includes a powerful mocking library for prototype development.
 
 * Separation of User Interface and Business Logic
 
-![](2022-10-05-07-12-54.png)
+![](./images/2022-10-05-07-12-54.png)
 
 ### Key Features of React
 ---------------------
@@ -197,7 +197,7 @@ Additionally, it includes a powerful mocking library for prototype development.
 <!-- ------------------------ -->
 ## Summary differences
 
-![](2022-10-05-07-16-09.png)
+![](./images/2022-10-05-07-16-09.png)
 
 
 <table><tbody><tr><td width="301"><strong>Angular</strong></td><td width="301"><strong>React</strong></td></tr><tr><td width="301">Offers a complete framework to design large enterprise, progressive and single-page applications</td><td width="301">Used as a JavaScript library to render individual UI components</td></tr><tr><td width="700">Provides advanced features like dependency injection, differential loading, lazy loading</td><td width="700">Supports only lazy loading</td></tr><tr><td width="301">Angular is based on TypeScript</td><td width="301">React is based on JavaScript</td></tr><tr><td width="301">Follows MVC architecture</td><td width="301">Based on Virtual DOM</td></tr><tr><td width="301">It can be thought of as an extension of HTML attributes</td><td width="301">Developers can write HTML code inside a script that React renders as a component</td></tr><tr><td width="301">Provides debugging and testing functionality as a tool</td><td width="301">React doesn’t provide any in-built tool, so we have to use various tools for different types of testing</td></tr><tr><td width="301">Greater learning curve but comparatively easy to setup</td><td width="301">An easier learning curve, however, takes time to setup</td></tr><tr><td width="301">Two-way binding wherein the model state changes as the data changes</td><td width="301">One-way data binding, wherein the UI elements can be changed only when the model state changes</td></tr><tr><td width="301">We cannot add a JavaScript library to the source code</td><td width="301">Allows to add JavaScript library to the source code</td></tr><tr><td width="301">Angular CLI provides a host of tools for development and seamless updates</td><td width="301">Since React is only for UI, it doesn’t have a CLI</td></tr></tbody></table>
@@ -247,7 +247,7 @@ ng version
 ```
 If the command works successfully, you'll find a message similar to the screenshot below.
 
-![Angular CLI output displaying the angular version](2022-10-05-05-22-48.png)
+![Angular CLI output displaying the angular version](./images/2022-10-05-05-22-48.png)
 
 ```sh
 # Getting help in Angular CLI
@@ -287,7 +287,7 @@ Angular will now install the node_modules needed for the application and create 
 $ cd chat-ui
 $ ng serve --open 
 ```
-![](2022-10-05-06-01-12.png)
+![](./images/2022-10-05-06-01-12.png)
 
 The `ng serve` command keep watching source files, so if you make any changes in any file of the project, it will rebuild it and refresh the browser automatically to reflect the changes.
 
@@ -378,4 +378,4 @@ Use the following CLI command to generate a component.
 ng generate component messages
 ```
 
-![](2022-10-05-06-14-31.png)
+![](./images/2022-10-05-06-14-31.png)

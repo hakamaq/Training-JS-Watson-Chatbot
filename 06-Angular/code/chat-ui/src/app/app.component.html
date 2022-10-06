@@ -10,6 +10,8 @@
         [value]="chatInputText"
         placeholder="Type your message here..."
         name="user_input"
+        (keydown.enter)="onSend(chatInputText)"
+
       />
       <button (click)="onSend(chatInputText)" class="messager-send-btn">
         Send
