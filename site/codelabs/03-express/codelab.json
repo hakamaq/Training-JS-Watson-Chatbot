@@ -3,25 +3,24 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2022-10-03T14:19:21+03:00",
-  "id": "02-node-js",
-  "duration": 3,
-  "title": "Introduction to NodeJS",
+  "updated": "2022-10-04T07:31:46+03:00",
+  "id": "03-express",
+  "duration": 0,
+  "title": "Express Framework",
   "authors": "Hakam Abdelqader",
-  "summary": "Summary of lab",
+  "summary": "Understanding express",
   "source": "README.md",
   "theme": "",
   "status": [
     "published"
   ],
   "category": [
-    "nodejs",
-    "javascript"
+    "express"
   ],
   "tags": [
     "polymer-summit",
     "web"
   ],
   "feedback": "mailto:hakam.abdelqader@ibm.com",
-  "url": "02-node-js"
+  "url": "03-express"
 }

@@ -46,6 +46,8 @@ $color-weave-green: #0f9d58;
 
 /* Custom Colours */
 $color-rest-grey: #a2a7ab;
+$color-react-grey: #6FC0DB;
+$color-websockets-grey: #000000;
 
 /* Mixins */
 
@@ -59,7 +61,7 @@ $color-rest-grey: #a2a7ab;
   }
 
   %icon-#{$icon} {
-    background-image: url('./images/icons/#{$icon}');
+    background-image: url('../images/icons/#{$icon}');
   }
 
   @each $category in $categories {
@@ -77,10 +79,12 @@ $color-rest-grey: #a2a7ab;
   }
 }
 
-// @include codelab-card([ "rest" ], $color-rest-grey, "rest.svg");
+@include codelab-card([ "websockets", "socketio", "socket.io" ], $color-websockets-grey, "socketio.svg");
 @include codelab-card([ "javascript", "Javascript", "JS" ], $color-google-yellow, "js.svg");
 @include codelab-card([ "angular", "Angular" ], $color-google-red, "angular-js.svg");
+@include codelab-card([ "express", "Express" ], $color-google-red, "express.svg");
 @include codelab-card([ "nodejs", "NodeJs", "NodeJS" ], $color-google-green, "nodejs.svg");
+@include codelab-card([ "mongodb", "MongoDB", "mongoDB" ], $color-google-green, "mongo-db.svg");
 
 /* Actual CSS classes */
 

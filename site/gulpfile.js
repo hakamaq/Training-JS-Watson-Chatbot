@@ -53,14 +53,14 @@ const DEFAULT_CATEGORY = 'Default';
 // BASE_URL is the canonical base URL where the site will reside. This should
 // always include the protocol (http:// or https://) and NOT including a
 // trailing slash.
-const BASE_URL = args.baseUrl || 'https://hakamaq.github.io/Training-JS-Watson-Chatbot';
+const BASE_URL = args.baseUrl || '.';
 
 console.log("Link create with baseURL",BASE_URL)
 
 // CODELABS_DIR is the directory where the actual codelabs exist on disk.
 // Despite being a constant, this can be overridden with the --codelabs-dir
 // flag.
-const CODELABS_DIR = args.codelabsDir || '.';
+const CODELABS_DIR = args.codelabsDir || './codelabs/';
 
 // CODELABS_ENVIRONMENT is the environment for which to build codelabs.
 const CODELABS_ENVIRONMENT = args.codelabsEnv || 'web';
@@ -598,6 +598,10 @@ const generateView = () => {
       canonicalViewUrl: viewFuncs.canonicalViewUrl(),
       categoryClass: viewFuncs.categoryClass(),
       categoryHasShowableCodelabs: viewFuncs.categoryHasShowableCodelabs(viewId),
+      //capitilize the first letter for category
+      capitalizeFirstLetter: (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      },
       codePrettyDate: viewFuncs.codelabPrettyDate(),
       codelabPin: viewFuncs.codelabPin(),
       codelabUrl: viewFuncs.codelabUrl(codelabUrlParams),
@@ -669,7 +673,7 @@ const viewFuncs = {
         url = `${url}?${params}`;
       }
       if (url.length > 0 && url[0] !== '/') {
-        url = `/${url}`;
+        url = `${BASE_URL}/${url}`;
       }
       return url;
     }

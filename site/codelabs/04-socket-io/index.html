@@ -1,0 +1,429 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>WebSockets and Socket.io</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="04-socket-io"
+                  title="WebSockets and Socket.io"
+                  environment="web"
+                  feedback-link="mailto:hakam.abdelqader">
+    
+      <google-codelab-step label="Setting up Express" duration="2">
+        <p>Create a new folder anywhere and initialize npm init and install express</p>
+<pre><code>$ mkdir socketIo-chatbot
+$ cd socketIo-chatbot
+$ npm init
+$ npm install express --save
+</code></pre>
+<p>Now let&#39;s create a file for Node to run as our server. Create a file called <code>server.js</code> and put this in it:</p>
+<pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;);
+const app = express();
+
+const port = process.env.PORT || 3000;
+
+app.use(express.static(`${__dirname}/public`)); 
+
+app.get(&#34;/&#34;, function(req, res){
+    res.sendFile(__dirname + &#34;/public/index.html&#34;)
+})
+
+app.listen(port, function(){
+    console.log(&#34;Listening on *:&#34; + port);
+})
+</code></pre>
+<h2 is-upgraded>Test application running</h2>
+<pre><code>npm start
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating index.html" duration="0">
+        <p>First create a folder in the root of the project <code>public</code> this is where we will put our chatbot</p>
+<pre><code>mkdir public
+</code></pre>
+<p>Let&#39;s create <code>index.html</code> to serve as the file we get from the server. Place this  inside <code>public</code> folder</p>
+<h2 is-upgraded>HTML</h2>
+<pre><code language="language-html" class="language-html">&lt;!DOCTYPEhtml&gt;&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Real-time Chat App&lt;/title&gt;
+        &lt;meta name=&#34;viewport&#34; content=&#34;width=device-width,minimum-scale=1,initial-scale=1&#34;&gt;
+        &lt;link rel=&#34;stylesheet&#34; href=&#34;style.css&#34;&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;ul class=&#34;messages&#34;&gt;&lt;/ul&gt;
+        &lt;form&gt;
+            &lt;input type=&#34;text&#34;class=&#34;input&#34;autocomplete=&#34;off&#34;autofocus/&gt;
+            &lt;button&gt;Send&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/body&gt;
+    &lt;script src=&#34;script.js&#34;&gt;&lt;/script&gt;
+    &lt;/html&gt;
+</code></pre>
+<h2 is-upgraded>Styles</h2>
+<p>Create another file name it <code>style.css</code></p>
+<p>Here are all the styles you will need:</p>
+<pre><code language="language-css" class="language-css">body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    padding: 0.25rem;
+}
+
+form input {
+    border: 0;
+    padding: 0.5rem;
+    width: 100%;
+    outline: 0;
+    margin-right: 0.5rem;
+    border-radius: 0.25rem;
+    background: #ccc;
+}
+
+form button {
+    width: 6rem;
+    background-color: #1b8c00;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+}
+
+form button:hover {
+    background-color: #166d01;
+}
+
+.messages {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 3rem;
+}
+
+.messages li {
+    padding: 0.5rem;
+}
+
+.messages li:nth-child(odd) {
+    background: #eee;
+}
+</code></pre>
+<h2 is-upgraded>JavaScript Client side</h2>
+<p>Create another file name it <code>script.js</code></p>
+<p>JavaScript to interact with the webpage</p>
+<pre><code language="language-js" class="language-js">const form = document.querySelector(&#34;form&#34;);
+const input = document.querySelector(&#34;.input&#34;);
+const messages = document.querySelector(&#34;.messages&#34;);
+const username = prompt(&#34;Please enter a username: &#34;, &#34;&#34;);
+
+form.addEventListener(&#34;submit&#34;, function(event) {
+    event.preventDefault();
+
+    addMessage(username + &#34;: &#34; + input.value);
+
+    input.value = &#34;&#34;;
+    return false;
+}, false);
+
+addMessage(&#34;You have joined the chat as &#39;&#34; + username  + &#34;&#39;.&#34;);
+
+function addMessage(message) {
+    const li = document.createElement(&#34;li&#34;);
+    li.innerHTML = message;
+    messages.appendChild(li);
+    window.scrollTo(0, document.body.scrollHeight);
+}
+</code></pre>
+<h3 is-upgraded>Summary</h3>
+<p>The code here is really simple. The first three assignments are just querying the page for the form, input button, and our messages list.</p>
+<p>The fourth one is the prompt that asks you what username you&#39;d like to use. After that we attach a listener to prevent the form from submitting, add the message we sent by calling the <code>addMessage</code> function, then we reset the value of the input so that we can use it for the next message.</p>
+<p>The <code>addMessage</code> function takes a string as a parameter and uses it to set the contents of a brand new <code>li</code> element.</p>
+<p>That new element is then appended to the <code>messages</code> list. Finally, we scroll to the bottom of the body so that new messages are always in view.</p>
+<p>Now if you were to head on over to <code>localhost:3000</code>, your running server should now serve you this file. Upon page load, you should get a prompt asking you to enter your desired username. After that, you should see the join message with your desired username.</p>
+<h2 is-upgraded>Choose Username</h2>
+<p class="image-container"><img src="img/1906c41f7ed295be.png"></p>
+<h2 is-upgraded>Entering Chat</h2>
+<p class="image-container"><img src="img/4ac7b605e4623c65.png"></p>
+<h2 is-upgraded>Writing your message</h2>
+<p class="image-container"><img src="img/20b98b80984a6fd3.png"></p>
+<p>If you see this, you have done everything correctly so far!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Setting Up Socket.io on the Server" duration="0">
+        <p>Let&#39;s get started with actually using Socket.io. Install it by running this command:</p>
+<pre><code>npm install -save socket.io
+</code></pre>
+<p>Open your <code>index.js</code> and add this to the top:</p>
+<pre><code language="language-js" class="language-js">const http = require(&#34;http&#34;).createServer(app);
+var io = require(&#34;socket.io&#34;)(http);
+</code></pre>
+<p>This line allows us to start using Socket.io on the server. Let&#39;s dive straight into all the code we&#39;ll need to power this app. Add this to your <code>index.js</code>:</p>
+<pre><code language="language-js" class="language-js">io.on(&#34;connection&#34;, function(socket) {
+
+    socket.on(&#34;user_join&#34;, function(data) {
+        this.username = data;
+        socket.broadcast.emit(&#34;user_join&#34;, data);
+    });
+
+    socket.on(&#34;chat_message&#34;, function(data) {
+        data.username = this.username;
+        socket.broadcast.emit(&#34;chat_message&#34;, data);
+    });
+
+    socket.on(&#34;disconnect&#34;, function(data) {
+        socket.broadcast.emit(&#34;user_leave&#34;, this.username);
+    });
+});
+</code></pre>
+<p>What this code is doing is attaching listeners to any event we want to on any incoming socket that successfully connected. In other words, if a socket connection is established, these are the events we want to listen for.</p>
+<p>In our case the events we have are <code>user_join</code> which sets the username on the socket for later use and then broadcast back that data to alert others that somebody has joined, <code>chat_message</code> which attaches the username and then broadcasts to everybody else that a new message was sent, and <code>disconnect</code> which also broadcasts to everybody else that somebody has left the chat.</p>
+<p>Believe it or not, but that&#39;s all the code we need on the server for our chat app to function. Now we can move on the client!</p>
+<h2 is-upgraded>Our updated <code>server.js file</code></h2>
+<pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;);
+const app = express();
+var http = require(&#39;http&#39;).Server(app);
+var io = require(&#39;socket.io&#39;)(http);
+
+const port = process.env.PORT || 3000;
+
+app.use(express.static(path.join(__dirname, &#39;public&#39;))); 
+app.get(&#34;/&#34;, function(req, res){
+    res.sendFile(__dirname + &#34;/public/index.html&#34;)
+})
+
+app.listen(port, function(){
+    console.log(&#34;Listening on *:&#34; + port);
+})
+
+io.on(&#34;connection&#34;, function(socket) {
+
+  socket.on(&#34;user_join&#34;, function(data) {
+      this.username = data;
+      socket.broadcast.emit(&#34;user_join&#34;, data);
+  });
+
+  socket.on(&#34;chat_message&#34;, function(data) {
+      data.username = this.username;
+      socket.broadcast.emit(&#34;chat_message&#34;, data);
+  });
+
+  socket.on(&#34;disconnect&#34;, function(data) {
+      socket.broadcast.emit(&#34;user_leave&#34;, this.username);
+  });
+});
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Setting Up Socket.io on the Client" duration="0">
+        <p>To start using Socket.io on the client, we must import it. For simplicity&#39;s sake, we will use a CDN for this. Add this script tag in your <code>index.html</code> at the end of the body tag:</p>
+<pre><code language="language-html" class="language-html">&lt;script src=&#34;https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js&#34;&gt;&lt;/script&gt;
+
+</code></pre>
+<p>Now you can use it, like so:</p>
+<pre><code language="language-js" class="language-js">const socket =io();
+</code></pre>
+<p>Now that we have the capabilities to send and receive messages to and from the server, let&#39;s incorporate these new powers in our app. Your form listener should now tell the server when you sent a message. Since the server already knows the username, we only need to send the actual message, which we do like this:</p>
+<pre><code language="language-js" class="language-js">socket.emit(&#34;chat_message&#34;,{
+    message: input.value
+});
+</code></pre>
+<p>Your new form listener should now look like this:</p>
+<pre><code language="language-js" class="language-js">form.addEventListener(&#34;submit&#34;,function(event){
+    event.preventDefault();
+
+    addMessage(username +&#34;: &#34;+ input.value);
+
+    socket.emit(&#34;chat_message&#34;,{
+        message: input.value
+    });
+
+    input.value =&#34;&#34;;
+    returnfalse;},false);
+</code></pre>
+<p>Now let&#39;s add our client-sided listeners for events coming from the server. Again, these are going to be <code>chat_message</code>,<code>user_join</code>, and <code>user_leave</code>:</p>
+<pre><code language="language-js" class="language-js">socket.on(&#34;chat_message&#34;,function(data){
+    addMessage(data.username +&#34;: &#34;+ data.message);});
+
+socket.on(&#34;user_join&#34;,function(data){
+    addMessage(data +&#34; just joined the chat!&#34;);});
+
+socket.on(&#34;user_leave&#34;,function(data){
+    addMessage(data +&#34; has left the chat.&#34;);});
+</code></pre>
+<p>In all three of these cases, the only thing we need to do is add a new message with the relevant information. This means adding a new message when a <code>chat_message</code> event is received, and then doing the same whenever somebody joins or leaves the chat.</p>
+<p>Finally, when we load the page, we need to tell the server, and thus others, that we have joined. We do this by emitting a <code>user_join</code> message with the username we chose for ourselves:</p>
+<pre><code language="language-js" class="language-js">socket.emit(&#34;user_join&#34;, username);
+</code></pre>
+<p>Put this all together, and your finalized client-sided JavaScript should look something like this:</p>
+<pre><code language="language-js" class="language-js">const form = document.querySelector(&#34;form&#34;);
+const input = document.querySelector(&#34;.input&#34;);
+const messages = document.querySelector(&#34;.messages&#34;);
+const username = prompt(&#34;Please enter a nickname: &#34;, &#34;&#34;);
+const socket = io();
+
+form.addEventListener(&#34;submit&#34;, function(event) {
+    event.preventDefault();
+
+    addMessage(username + &#34;: &#34; + input.value);
+
+    socket.emit(&#34;chat_message&#34;, {
+        message: input.value
+    });
+
+    input.value = &#34;&#34;;
+    return false;
+}, false);
+
+socket.on(&#34;chat_message&#34;, function(data) {
+    addMessage(data.username + &#34;: &#34; + data.message);
+});
+
+socket.on(&#34;user_join&#34;, function(data) {
+    addMessage(data + &#34; just joined the chat!&#34;);
+});
+
+socket.on(&#34;user_leave&#34;, function(data) {
+    addMessage(data + &#34; has left the chat.&#34;);
+});
+
+addMessage(&#34;You have joined the chat as &#39;&#34; + username  + &#34;&#39;.&#34;);
+socket.emit(&#34;user_join&#34;, username);
+
+function addMessage(message) {
+    const li = document.createElement(&#34;li&#34;);
+    li.innerHTML = message;
+    messages.appendChild(li);
+    window.scrollTo(0, document.body.scrollHeight);
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Conclusion" duration="0">
+        <p>Putting everything together your final <code>server.js</code> should look like this:</p>
+<pre><code language="language-js" class="language-js">import { Server } from &#39;socket.io&#39;;
+import express from &#39;express&#39;;
+import { createServer } from &#39;http&#39;;
+
+const app = express();
+const http = createServer();
+const io = new Server(server);
+const port = process.env.PORT || 3000;
+
+app.get(&#34;/&#34;, function(req, res) {
+    res.sendFile(__dirname + &#34;/index.html&#34;);
+});
+
+io.on(&#34;connection&#34;, function(socket) {
+
+    socket.on(&#34;user_join&#34;, function(data) {
+        this.username = data;
+        socket.broadcast.emit(&#34;user_join&#34;, data);
+    });
+
+    socket.on(&#34;chat_message&#34;, function(data) {
+        data.username = this.username;
+        socket.broadcast.emit(&#34;chat_message&#34;, data);
+    });
+
+    socket.on(&#34;disconnect&#34;, function(data) {
+        socket.broadcast.emit(&#34;user_leave&#34;, this.username);
+    });
+});
+
+http.listen(port, function() {
+    console.log(&#34;Listening on *:&#34; + port);
+});
+</code></pre>
+<p>And your final <code>script.js</code> like this:</p>
+<pre><code language="language-js" class="language-js">const form = document.querySelector(&#34;form&#34;);
+            const input = document.querySelector(&#34;.input&#34;);
+            const messages = document.querySelector(&#34;.messages&#34;);
+            const username = prompt(&#34;Please enter a nickname: &#34;, &#34;&#34;);
+            const socket = io();
+
+            form.addEventListener(&#34;submit&#34;, function(event) {
+                event.preventDefault();
+
+                addMessage(username + &#34;: &#34; + input.value);
+
+                socket.emit(&#34;chat_message&#34;, {
+                    message: input.value
+                });
+
+                input.value = &#34;&#34;;
+                return false;
+            }, false);
+
+            socket.on(&#34;chat_message&#34;, function(data) {
+                addMessage(data.username + &#34;: &#34; + data.message);
+            });
+
+            socket.on(&#34;user_join&#34;, function(data) {
+                addMessage(data + &#34; just joined the chat!&#34;);
+            });
+
+            socket.on(&#34;user_leave&#34;, function(data) {
+                addMessage(data + &#34; has left the chat.&#34;);
+            });
+
+            addMessage(&#34;You have joined the chat as &#39;&#34; + username  + &#34;&#39;.&#34;);
+            socket.emit(&#34;user_join&#34;, username);
+
+            function addMessage(message) {
+                const li = document.createElement(&#34;li&#34;);
+                li.innerHTML = message;
+                messages.appendChild(li);
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+</code></pre>
+<p>Make sure to restart your server to use your new code.</p>
+<p>Once you do, you should be able to open multiple tabs on your browser, give each tab a unique name, chat across all of them in real-time, leave and join and see the messages on the other clients, just as you would expect.</p>
+<p>While this is a simple example of using Socket.io, it is very powerful and supports many more features than the ones shown here.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

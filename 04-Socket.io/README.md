@@ -1,76 +1,479 @@
-Welcome to this Socket.IO tutorial, which will teach you how to use the library.
+id: 04-socket-io
+summary: Socket.io Introduction
+categories: WebSockets
+status: Published
+authors: Hakam
+Feedback Link: mailto:hakam.abdelqader
 
-## Why it's useful[](https://replit.com/talk/learn/SocketIO-Tutorial-What-its-for-and-how-to-use/143781#why-it's-useful)
+# WebSockets and Socket.io
 
-Socket.IO is a JavaScript library for communication between web clients and servers in real time. It can be used to make multiplayer games. My [chat project](https://replit.com/talk/share/Chat-Updated/140472), [connect 4 game](https://replit.com/talk/share/Connect-4-The-online-version-play-on-one-device-or-on-different-devices/142068), [video conferencing app](https://replit.com/talk/share/EasyMeet-A-video-conferencing-app-I-made/142702), and [multiplayer pong game](https://replit.com/talk/share/MultiPong-A-multiplayer-pong-game-and-its-my-birthday-today-D/143432) all used Socket.IO.
+<!-- ------------------------ -->
+## Setting up Express 
+Duration: 00:02:00
 
-## Content[](https://replit.com/talk/learn/SocketIO-Tutorial-What-its-for-and-how-to-use/143781#content)
+Create a new folder anywhere and initialize npm init and install express
 
--   Sending a message in client and server
--   Recieving a message in client and server
--   Socket IDs
--   Rooms
--   Different ways to send messages
+```
+$ mkdir socketIo-chatbot
+$ cd socketIo-chatbot
+$ npm init
+$ npm install express --save
+```
 
-We'll be using Express for the server. I'll be explaining a lot of the code with comments.
+Now let's create a file for Node to run as our server. Create a file called `server.js` and put this in it:
 
-### Sending/recieving a message in client and server[](https://replit.com/talk/learn/SocketIO-Tutorial-What-its-for-and-how-to-use/143781#sendingrecieving-a-message-in-client-and-server)
 
-Let's start by creating a Node.js repl. Then insert the following code:
+```js
+const express = require('express');
+const app = express();
 
-Once you run the code, Replit will install packages. Then you'll see a page that says `Cannot GET /`, because we haven't added any pages yet.
+const port = process.env.PORT || 3000;
 
-Remember, you use `socket.on` to recieve a message, and `socket.emit` to send a message.
+app.use(express.static(`${__dirname}/public`)); 
 
-Next, create a new folder called `public`, and in the folder, create a file called `index.html` and a file called `script.js`.
+app.get("/", function(req, res){
+    res.sendFile(__dirname + "/public/index.html")
+})
 
-In `public/index.html` add this:
+app.listen(port, function(){
+    console.log("Listening on *:" + port);
+})
+```
 
-And in `public/script.js` add this code:
+### Test application running
 
-Now, to test it, open the website. It should show a popup saying `someone joined`. Then open the website again in another tab to make sure that the `socket.on` works in the first tab. In both tabs, it should say `someone joined`. When you close one of the tabs, the other tab should say `someone left`.
+```
+npm start
+```
 
-Yay! We've made a really simple multiplayer website!
+<!-- ------------------------ -->
+## Creating index.html 
 
-But what if we wanted to pass in values, and the client that recieved the message also recieves the value? Well, lucky for us, it's super easy in Socket.IO. If we wanted to use `socket.emit` or `io.emit` to pass in a variable, you could just pass in more arguments:
+First create a folder in the root of the project `public` this is where we will put our chatbot
 
-or
+```
+mkdir public
+```
 
-And to recieve the message, you would do:
+Let's create `index.html` to serve as the file we get from the server. Place this  inside `public` folder
 
-You can add as many arguments as you would like:
+### HTML
 
-### Socket IDs[](https://replit.com/talk/learn/SocketIO-Tutorial-What-its-for-and-how-to-use/143781#socket-ids)
+```html
+<!DOCTYPEhtml><html>
+    <head>
+        <title>Real-time Chat App</title>
+        <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <ul class="messages"></ul>
+        <form>
+            <input type="text"class="input"autocomplete="off"autofocus/>
+            <button>Send</button>
+        </form>
+    </body>
+    <script src="script.js"></script>
+    </html>
+```
 
-A socket ID is a identifier of 20 random characters, for example `7CFGPYjHt_Qk7JMBAAAL`. Socket IDs are useful if you wanted to keep track of users online, or if you wanted to send a message to just one user.
+### Styles 
+Create another file name it `style.css`
 
-To get the ID, you would do something like this:
+Here are all the styles you will need:
 
-If you used `socket.id` in the client, it would return their Socket ID. If you used `socket.id` in the server, it would return the Socket ID of the client that sent a message.
+```css
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
 
-To send a message from the server to just one client, you would do this:
+form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    padding: 0.25rem;
+}
 
-### Rooms[](https://replit.com/talk/learn/SocketIO-Tutorial-What-its-for-and-how-to-use/143781#rooms)
+form input {
+    border: 0;
+    padding: 0.5rem;
+    width: 100%;
+    outline: 0;
+    margin-right: 0.5rem;
+    border-radius: 0.25rem;
+    background: #ccc;
+}
 
-Socket.IO rooms make it easy for you implement rooms in a website. All of my projects mentioned at the start of this tutorial had rooms.
+form button {
+    width: 6rem;
+    background-color: #1b8c00;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+}
 
-To join a room, you would use this code in the server:
+form button:hover {
+    background-color: #166d01;
+}
 
-And to leave a room:
+.messages {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 3rem;
+}
 
-To send a message to all clients in a room you would do this:
+.messages li {
+    padding: 0.5rem;
+}
 
-Let's try making our repl allow people to enter their names and join rooms.
+.messages li:nth-child(odd) {
+    background: #eee;
+}
+```
 
-In `index.js`:
+### JavaScript Client side
 
-In `public/index.html`, it's the same as before. And in  
-`public/script.js`:
+Create another file name it `script.js`
 
-### Different ways to send messages[](https://replit.com/talk/learn/SocketIO-Tutorial-What-its-for-and-how-to-use/143781#different-ways-to-send-messages)
+JavaScript to interact with the webpage
 
-Here are the ways you can send a message from the server to the client:
+```js
+const form = document.querySelector("form");
+const input = document.querySelector(".input");
+const messages = document.querySelector(".messages");
+const username = prompt("Please enter a username: ", "");
 
-This tutorial has come to an end, and I hope you learned something!
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
 
-## Bye![](https://replit.com/talk/learn/SocketIO-Tutorial-What-its-for-and-how-to-use/143781#bye!)
+    addMessage(username + ": " + input.value);
+
+    input.value = "";
+    return false;
+}, false);
+
+addMessage("You have joined the chat as '" + username  + "'.");
+
+function addMessage(message) {
+    const li = document.createElement("li");
+    li.innerHTML = message;
+    messages.appendChild(li);
+    window.scrollTo(0, document.body.scrollHeight);
+}
+```
+
+<!-- ------------------------ -->
+#### Summary 
+
+The code here is really simple. The first three assignments are just querying the page for the form, input button, and our messages list. 
+
+The fourth one is the prompt that asks you what username you'd like to use. After that we attach a listener to prevent the form from submitting, add the message we sent by calling the `addMessage` function, then we reset the value of the input so that we can use it for the next message.
+
+The `addMessage` function takes a string as a parameter and uses it to set the contents of a brand new `li` element.
+
+ That new element is then appended to the `messages` list. Finally, we scroll to the bottom of the body so that new messages are always in view.
+
+
+Now if you were to head on over to `localhost:3000`, your running server should now serve you this file. Upon page load, you should get a prompt asking you to enter your desired username. After that, you should see the join message with your desired username.
+
+### Choose Username
+![](images/2022-10-04-06-57-10.png)
+
+### Entering Chat
+
+![](images/2022-10-04-06-57-26.png)
+
+### Writing your message
+![](images/2022-10-04-06-58-43.png)
+
+
+If you see this, you have done everything correctly so far!
+
+<!-- ------------------------ -->
+## Setting Up Socket.io on the Server
+Duration: 
+
+
+
+Let's get started with actually using Socket.io. Install it by running this command:
+
+```
+npm install -save socket.io
+```
+
+Open your `index.js` and add this to the top:
+
+```js
+const http = require("http").createServer(app);
+var io = require("socket.io")(http);
+```
+
+This line allows us to start using Socket.io on the server. Let's dive straight into all the code we'll need to power this app. Add this to your `index.js`:
+
+```js
+io.on("connection", function(socket) {
+
+    socket.on("user_join", function(data) {
+        this.username = data;
+        socket.broadcast.emit("user_join", data);
+    });
+
+    socket.on("chat_message", function(data) {
+        data.username = this.username;
+        socket.broadcast.emit("chat_message", data);
+    });
+
+    socket.on("disconnect", function(data) {
+        socket.broadcast.emit("user_leave", this.username);
+    });
+});
+```
+
+What this code is doing is attaching listeners to any event we want to on any incoming socket that successfully connected. In other words, if a socket connection is established, these are the events we want to listen for.
+
+In our case the events we have are `user_join` which sets the username on the socket for later use and then broadcast back that data to alert others that somebody has joined, `chat_message` which attaches the username and then broadcasts to everybody else that a new message was sent, and `disconnect` which also broadcasts to everybody else that somebody has left the chat.
+
+Believe it or not, but that's all the code we need on the server for our chat app to function. Now we can move on the client!
+
+### Our updated `server.js file`
+
+```js
+const express = require('express');
+const app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+const port = process.env.PORT || 3000;
+
+app.use(express.static(path.join(__dirname, 'public'))); 
+app.get("/", function(req, res){
+    res.sendFile(__dirname + "/public/index.html")
+})
+
+app.listen(port, function(){
+    console.log("Listening on *:" + port);
+})
+
+io.on("connection", function(socket) {
+
+  socket.on("user_join", function(data) {
+      this.username = data;
+      socket.broadcast.emit("user_join", data);
+  });
+
+  socket.on("chat_message", function(data) {
+      data.username = this.username;
+      socket.broadcast.emit("chat_message", data);
+  });
+
+  socket.on("disconnect", function(data) {
+      socket.broadcast.emit("user_leave", this.username);
+  });
+});
+```
+
+<!-- ------------------------ -->
+## Setting Up Socket.io on the Client
+
+To start using Socket.io on the client, we must import it. For simplicity's sake, we will use a CDN for this. Add this script tag in your `index.html` at the end of the body tag:
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+
+```
+
+Now you can use it, like so:
+
+```js
+const socket =io();
+```
+
+Now that we have the capabilities to send and receive messages to and from the server, let's incorporate these new powers in our app. Your form listener should now tell the server when you sent a message. Since the server already knows the username, we only need to send the actual message, which we do like this:
+
+```js
+socket.emit("chat_message",{
+    message: input.value
+});
+```
+
+Your new form listener should now look like this:
+
+```js
+form.addEventListener("submit",function(event){
+    event.preventDefault();
+
+    addMessage(username +": "+ input.value);
+
+    socket.emit("chat_message",{
+        message: input.value
+    });
+
+    input.value ="";
+    returnfalse;},false);
+```
+
+Now let's add our client-sided listeners for events coming from the server. Again, these are going to be `chat_message`,`user_join`, and `user_leave`:
+
+```js
+socket.on("chat_message",function(data){
+    addMessage(data.username +": "+ data.message);});
+
+socket.on("user_join",function(data){
+    addMessage(data +" just joined the chat!");});
+
+socket.on("user_leave",function(data){
+    addMessage(data +" has left the chat.");});
+```
+
+In all three of these cases, the only thing we need to do is add a new message with the relevant information. This means adding a new message when a `chat_message` event is received, and then doing the same whenever somebody joins or leaves the chat.
+
+Finally, when we load the page, we need to tell the server, and thus others, that we have joined. We do this by emitting a `user_join` message with the username we chose for ourselves:
+
+```js
+socket.emit("user_join", username);
+```
+
+Put this all together, and your finalized client-sided JavaScript should look something like this:
+
+```js
+const form = document.querySelector("form");
+const input = document.querySelector(".input");
+const messages = document.querySelector(".messages");
+const username = prompt("Please enter a nickname: ", "");
+const socket = io();
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    addMessage(username + ": " + input.value);
+
+    socket.emit("chat_message", {
+        message: input.value
+    });
+
+    input.value = "";
+    return false;
+}, false);
+
+socket.on("chat_message", function(data) {
+    addMessage(data.username + ": " + data.message);
+});
+
+socket.on("user_join", function(data) {
+    addMessage(data + " just joined the chat!");
+});
+
+socket.on("user_leave", function(data) {
+    addMessage(data + " has left the chat.");
+});
+
+addMessage("You have joined the chat as '" + username  + "'.");
+socket.emit("user_join", username);
+
+function addMessage(message) {
+    const li = document.createElement("li");
+    li.innerHTML = message;
+    messages.appendChild(li);
+    window.scrollTo(0, document.body.scrollHeight);
+}
+```
+
+<!-- ------------------------ -->
+## Conclusion
+
+
+Putting everything together your final `server.js` should look like this:
+
+```js
+import { Server } from 'socket.io';
+import express from 'express';
+import { createServer } from 'http';
+
+const app = express();
+const http = createServer();
+const io = new Server(server);
+const port = process.env.PORT || 3000;
+
+app.get("/", function(req, res) {
+    res.sendFile(__dirname + "/index.html");
+});
+
+io.on("connection", function(socket) {
+
+    socket.on("user_join", function(data) {
+        this.username = data;
+        socket.broadcast.emit("user_join", data);
+    });
+
+    socket.on("chat_message", function(data) {
+        data.username = this.username;
+        socket.broadcast.emit("chat_message", data);
+    });
+
+    socket.on("disconnect", function(data) {
+        socket.broadcast.emit("user_leave", this.username);
+    });
+});
+
+http.listen(port, function() {
+    console.log("Listening on *:" + port);
+});
+```
+
+And your final `script.js` like this:
+
+```js
+const form = document.querySelector("form");
+            const input = document.querySelector(".input");
+            const messages = document.querySelector(".messages");
+            const username = prompt("Please enter a nickname: ", "");
+            const socket = io();
+
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                addMessage(username + ": " + input.value);
+
+                socket.emit("chat_message", {
+                    message: input.value
+                });
+
+                input.value = "";
+                return false;
+            }, false);
+
+            socket.on("chat_message", function(data) {
+                addMessage(data.username + ": " + data.message);
+            });
+
+            socket.on("user_join", function(data) {
+                addMessage(data + " just joined the chat!");
+            });
+
+            socket.on("user_leave", function(data) {
+                addMessage(data + " has left the chat.");
+            });
+
+            addMessage("You have joined the chat as '" + username  + "'.");
+            socket.emit("user_join", username);
+
+            function addMessage(message) {
+                const li = document.createElement("li");
+                li.innerHTML = message;
+                messages.appendChild(li);
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+```
+
+Make sure to restart your server to use your new code. 
+
+Once you do, you should be able to open multiple tabs on your browser, give each tab a unique name, chat across all of them in real-time, leave and join and see the messages on the other clients, just as you would expect.
+
+While this is a simple example of using Socket.io, it is very powerful and supports many more features than the ones shown here. 

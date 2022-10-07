@@ -8,4 +8,4 @@
 codelab_markdown_filename=`ls *.md`
 rm -fr temp
 
-claat export -o   ../site/codelabs/ $codelab_markdown_filename
+claat export -o ../site/codelabs/ $codelab_markdown_filename

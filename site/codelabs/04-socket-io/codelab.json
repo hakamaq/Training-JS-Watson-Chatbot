@@ -1,0 +1,23 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-10-04T10:59:22+03:00",
+  "id": "04-socket-io",
+  "duration": 2,
+  "title": "WebSockets and Socket.io",
+  "authors": "Hakam",
+  "summary": "Socket.io Introduction",
+  "source": "README.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "websockets"
+  ],
+  "tags": [],
+  "feedback": "mailto:hakam.abdelqader",
+  "url": "04-socket-io"
+}
