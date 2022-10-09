@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>MongoDB Introduction</title>
+  <title>05-MongoDB</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
@@ -23,7 +23,7 @@
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="05-mongoDB"
-                  title="MongoDB Introduction"
+                  title="05-MongoDB"
                   environment="web"
                   feedback-link="mailto:hakam.abdelqader@ibm.com">
     
@@ -243,8 +243,14 @@ db.createCollection(&#34;empDetails&#34;)
 	]
 )
 
+
 </code></pre>
-<h2 is-upgraded>AND in MongoDB</h2>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AND and OR statements" duration="0">
+        <h2 is-upgraded>AND in MongoDB</h2>
 <p><strong>Syntax</strong> To query documents based on the AND condition, you need to use $and keyword. Following is the basic syntax of AND −</p>
 <pre><code language="language-sh" class="language-sh">db.mycol.find({ $and: [ {&lt;key1&gt;:&lt;value1&gt;}, { &lt;key2&gt;:&lt;value2&gt;} ] })
 
@@ -252,7 +258,7 @@ db.createCollection(&#34;empDetails&#34;)
 <p>For the above given example, equivalent where clause will be ‘ where by = ‘tutorials point&#39; AND title = ‘MongoDB Overview&#39; ‘. You can pass any number of key, value pairs in find clause.</p>
 <h2 is-upgraded>OR in MongoDB</h2>
 <p><strong>Syntax</strong> To query documents based on the OR condition, you need to use $or keyword. Following is the basic syntax of OR −</p>
-<pre><code language="language-sh" class="language-sh">db.mycol.find(
+<pre><code language="language-sh" class="language-sh">db.COLLECTION_NAME.find(
    {
       $or: [
          {key1: value1}, {key2:value2}
@@ -261,10 +267,10 @@ db.createCollection(&#34;empDetails&#34;)
 ).pretty()
 
 </code></pre>
-<p>Using AND and OR Together</p>
-<h2 is-upgraded>Example</h2>
+<h2 is-upgraded>Using AND and OR Together</h2>
+<p><strong>Example</strong></p>
 <p>The following example will show the documents that have likes greater than 10 and whose title is either ‘MongoDB Overview&#39; or by is ‘tutorials point&#39;. Equivalent SQL where clause is ‘where likes&gt;10 AND (by = ‘tutorials point&#39; OR title = ‘MongoDB Overview&#39;)&#39;</p>
-<pre><code language="language-sh" class="language-sh">db.user_info.find({&#34;Age&#34;: {$gt:26}, $or: [{&#34;First_Name&#34;: &#34;Fathima&#34;},
+<pre><code language="language-sh" class="language-sh">db.empDetails.find({&#34;Age&#34;: {$gt:26}, $or: [{&#34;First_Name&#34;: &#34;Fathima&#34;},
    {&#34;First_Name&#34;: &#34;Rachel&#34;}]}).pretty()
 {
 			First_Name: &#34;Rachel&#34;,
@@ -281,14 +287,15 @@ db.createCollection(&#34;empDetails&#34;)
       <google-codelab-step label="NOR in MongoDB" duration="0">
         <p><strong>Syntax</strong></p>
 <p>To query documents based on the NOT condition, you need to use $not keyword. Following is the basic syntax of NOT −</p>
-<p>db.COLLECTION_NAME.find(</p>
-<pre><code>{
-	$nor: [
-		{key1: value1}, {key2:value2}
-	]
-}
+<pre><code language="language-sh" class="language-sh">&gt;db.COLLECTION_NAME.find(
+	{
+		$nor: [
+			{key1: value1}, {key2:value2}
+		]
+	}
+)
+
 </code></pre>
-<p>)</p>
 <h2 is-upgraded>Example</h2>
 <p>Following example will retrieve the document(s) whose first name is not &#34;Radhika&#34; and last name is not &#34;Christopher&#34;</p>
 <pre><code language="language-sh" class="language-sh">&gt; db.empDetails.find(
@@ -315,7 +322,7 @@ db.createCollection(&#34;empDetails&#34;)
     
       <google-codelab-step label="NOT in MongoDB" duration="0">
         <p><strong>Syntax</strong></p>
-<p>To query documents based on the NOT condition, you need to use $not keyword following is the basic syntax of NOT −</p>
+<p>To query documents based on the NOT condition, you need to use $not keyword following is the basic syntax of NOT</p>
 <pre><code language="language-sh" class="language-sh">&gt;db.COLLECTION_NAME.find(
 	{
 		$NOT: [
@@ -326,7 +333,7 @@ db.createCollection(&#34;empDetails&#34;)
 </code></pre>
 <p><strong>Example</strong></p>
 <p>Following example will retrieve the document(s) whose age is not greater than 25</p>
-<pre><code language="language-sh" class="language-sh">&gt; db.empDetails.find( { &#34;Age&#34;: { $not: { $gt: &#34;25&#34; } } } )
+<pre><code language="language-sh" class="language-sh"> db.empDetails.find( { &#34;Age&#34;: { $not: { $gt: &#34;25&#34; } } } )
 {
 	&#34;_id&#34; : ObjectId(&#34;5dd6636870fb13eec3963bf7&#34;),
 	&#34;First_Name&#34; : &#34;Fathima&#34;,

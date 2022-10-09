@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>WebSockets and Socket.io</title>
+  <title>04-WebSockets and Socket.io</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
@@ -23,7 +23,7 @@
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="04-socket-io"
-                  title="WebSockets and Socket.io"
+                  title="04-WebSockets and Socket.io"
                   environment="web"
                   feedback-link="mailto:hakam.abdelqader">
     
@@ -413,6 +413,33 @@ http.listen(port, function() {
 <p>Make sure to restart your server to use your new code.</p>
 <p>Once you do, you should be able to open multiple tabs on your browser, give each tab a unique name, chat across all of them in real-time, leave and join and see the messages on the other clients, just as you would expect.</p>
 <p>While this is a simple example of using Socket.io, it is very powerful and supports many more features than the ones shown here.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Different ways to send messages" duration="0">
+        <p>Here are the ways you can send a message from the server to the client:</p>
+<pre><code language="language-js" class="language-js">// sending to sender only
+socket.emit(&#34;message&#34;, &#34;value&#34;);
+
+// sending to all clients, including sender
+io.emit(&#34;message&#34;, &#34;value&#34;);
+
+// sending to all clients except sender
+socket.broadcast.emit(&#34;message&#34;, &#34;value&#34;);
+
+// sending to all clients in room except sender
+socket.broadcast.to(&#34;ROOM&#34;).emit(&#34;message&#34;, &#34;value&#34;);
+
+// sending to all clients in room including sender
+io.to(&#34;ROOM&#34;).emit(&#34;message&#34;, &#34;value&#34;);
+
+// sending to sender only if they are in the room
+socket.to(&#34;ROOM&#34;).emit(&#34;message&#34;, &#34;value&#34;);
+
+// sending to individual Socket ID
+socket.broadcast.to(&#34;SOCKETID&#34;).emit(&#34;message&#34;, &#34;value&#34;);
+</code></pre>
 
 
       </google-codelab-step>

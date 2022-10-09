@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Angular Complete Crash Course</title>
+  <title>06-Angular vs React</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
@@ -23,7 +23,7 @@
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="06-angular"
-                  title="Angular Complete Crash Course"
+                  title="06-Angular vs React"
                   environment="web"
                   feedback-link="mailto:hakam.abdelqader@ibm.com">
     
@@ -220,124 +220,6 @@
 <p>The objective learning curves for both React and Angular can be understood in terms of their inherent framework-level and library-level features that create distinct complexity levels.</p>
 <p>Angular is a full-featured model-view -controller (MVC) framework whereas React is an open-source JavaScript library.</p>
 <p>The learning curve for Angular is relatively high with React possessing a low learning curve that is initially difficult to grasp.</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Angular Introduction" duration="0">
-        <p>These tutorials will help you learn the essentials of the latest version of Angular, starting from the basics to the advanced level.</p>
-<h2 is-upgraded>Environment Setup</h2>
-<h2 is-upgraded>New day, new folder</h2>
-<p>To start off with angular we need to create an empty folder that will host our chatbot and the assets we will create.</p>
-<pre><code language="language-sh" class="language-sh">mkdir Day-4-Angular
-</code></pre>
-<h2 is-upgraded>Install the Angular CLI</h2>
-<p>Once all of your dependencies are configured, you can install the Angular CLI from a command-line window on your computer:</p>
-<pre><code language="language-sh" class="language-sh">npm install -g @angular/cli
-</code></pre>
-<p>To confirm that your configuration is correct, run this command from your computer&#39;s command line:</p>
-<pre><code>ng version
-</code></pre>
-<p>If the command works successfully, you&#39;ll find a message similar to the screenshot below.</p>
-<p class="image-container"><img alt="Angular CLI output displaying the angular version" src="img/1ce94f414bdc567c.png"></p>
-<pre><code language="language-sh" class="language-sh"># Getting help in Angular CLI
-$ ng help
-</code></pre>
-<h2 is-upgraded>Get Started with Angular Bootstrap code</h2>
-<p>The code for this codelab contains the intermediate steps. To get started, follow the steps below:</p>
-<pre><code language="language-sh" class="language-sh"># Creating angular application
-# ng new &lt;project-name&gt; --skip-install
-$ ng new chat-ui
-</code></pre>
-<p>Angular will ask you if you want to include routing skip that as our chatbot does not include multiple pages</p>
-<pre><code language="language-sh" class="language-sh">? Would you like to add Angular routing? (y/N) N
-</code></pre>
-<p>Next Angular will ask what type of styling you would use select <code>CSS</code>.</p>
-<pre><code language="language-sh" class="language-sh">❯ CSS 
-  SCSS   [ https://sass-lang.com/documentation/syntax#scss                ] 
-  Sass   [ https://sass-lang.com/documentation/syntax#the-indented-syntax ] 
-  Less   [ http://lesscss.org                                             ] 
-</code></pre>
-<h2 is-upgraded>Check your project</h2>
-<p>Angular will now install the node_modules needed for the application and create the folder structure and creates all the files you need to get started. Once the installation is done run the command</p>
-<pre><code language="language-sh" class="language-sh">$ cd chat-ui
-$ ng serve --open 
-</code></pre>
-<p class="image-container"><img src="img/b9274ee47d866057.png"></p>
-<p>The <code>ng serve</code> command keep watching source files, so if you make any changes in any file of the project, it will rebuild it and refresh the browser automatically to reflect the changes.</p>
-<p>To stop the automatic build process, press <code>Ctrl + c / CMD + c</code> in the terminal of VS Code.</p>
-<p>Thus, you can create a workspace and an initial Angular project and run it using VS Code.</p>
-<h2 is-upgraded>To build for production</h2>
-<pre><code language="language-sh" class="language-sh"># to build application 
-$ ng build
-
-# create dist folder which will go for production
-</code></pre>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Folder structure" duration="0">
-        <h2 is-upgraded>Configuration files</h2>
-<ul>
-<li>angular.json -&gt; Angular</li>
-<li>package.json -&gt; Node</li>
-<li>tsconfig.json -&gt; TypeScript</li>
-<li>tslint.json -&gt; Linting</li>
-</ul>
-<h2 is-upgraded>Files in dist folder (after running ng build cmd)</h2>
-<ul>
-<li>runtime.js -&gt; This is for webpack runtime</li>
-<li>polyfill.js -&gt; Helps to run new ES version javascript in old browser which does not support them</li>
-<li>vendor.js -&gt; Actual project code (component, modules, model)</li>
-<li>main.js -&gt; Points first module</li>
-<li>style.js -&gt; all css code</li>
-</ul>
-<p>Angular is a SPA framework, and a view is made of one or more component. An Angular component represents a portion of a view.</p>
-<p>Generally, an interactive web page is made of HTML, CSS, and JavaScript. Angular component is no different.</p>
-<p>Angular Component = HTML Template + Component Class + Component Metadata</p>
-<h2 is-upgraded>HTML Template</h2>
-<p>HTML template is nothing but a regular HTML code with additional Angular specific syntax to communicate with the component class.</p>
-<h2 is-upgraded>Class</h2>
-<p>Essentially, a component class is a TypeScript class that includes properties and methods. Properties store data and methods include the logic for the component. Eventually, this class will be compiled into JavaScript.</p>
-<aside class="special"><p>TypeScript is an open-source, object-oriented language developed and maintained by Microsoft. It is a typed superset of JavaScript that compiles to plain JavaScript.</p>
-</aside>
-<h2 is-upgraded>Metadata</h2>
-<p>Metadata is some extra data for a component used by Angular API to execute the component, such as the location of HTML and CSS files of the component, selector, providers, etc.</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Create your first component" duration="0">
-        <p>Components are the core building blocks for Angular apps. Components are like lego pieces they are small segments of code that make up entire application or if we are building legos the whole lego model</p>
-<p>Components have 3 main aspects:</p>
-<ul>
-<li>An HTML file for the template.</li>
-<li>A CSS file for the styles.</li>
-<li>A TypeScript file for the behavior of the app.</li>
-</ul>
-<p>The first component you&#39;re going to update is <code>AppComponent</code>.</p>
-<ol type="1">
-<li>Open <code>app.component.html</code> in your code editor; this is the template file for the <code>AppComponent</code>.</li>
-<li>Delete all the code in this file and replace it with this:</li>
-</ol>
-<pre><code language="language-html" class="language-html">&lt;main&gt;
-  &lt;header&gt;Chat bot&lt;/header&gt;
-  &lt;section&gt;
-  &lt;/section&gt;
-&lt;/main&gt;
-
-</code></pre>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Generate Component" duration="0">
-        <p>You can create files for a component manually or using the Angular CLI command. Angular CLI reduces the development time. So, let&#39;s use Angular CLI to create a new component.</p>
-<p>Use the following CLI command to generate a component.</p>
-<pre><code language="language-sh" class="language-sh">ng generate component messages
-</code></pre>
-<p class="image-container"><img src="img/aafb8132bbc83da6.png"></p>
 
 
       </google-codelab-step>

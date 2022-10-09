@@ -3,21 +3,25 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2022-10-09T06:44:38+03:00",
-  "id": "05-mongoDB",
+  "updated": "2022-10-09T06:45:34+03:00",
+  "id": "07-mean-chatbot",
   "duration": 0,
-  "title": "05-MongoDB",
+  "title": "07-MongoDB + Express  + Angular + NodeJs Chatbot",
   "authors": "Hakam Abdelqader",
-  "summary": "Understand the CRUD meti",
+  "summary": "Summary of lab",
   "source": "README.md",
   "theme": "",
   "status": [
     "published"
   ],
   "category": [
+    "mean",
+    "angular",
+    "nodejs",
+    "express",
     "mongodb"
   ],
   "tags": [],
   "feedback": "mailto:hakam.abdelqader@ibm.com",
-  "url": "05-mongoDB"
+  "url": "07-mean-chatbot"
 }

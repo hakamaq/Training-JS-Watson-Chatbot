@@ -81,10 +81,11 @@ $color-websockets-grey: #000000;
 
 @include codelab-card([ "websockets", "socketio", "socket.io" ], $color-websockets-grey, "socketio.svg");
 @include codelab-card([ "javascript", "Javascript", "JS" ], $color-google-yellow, "js.svg");
-@include codelab-card([ "angular", "Angular" ], $color-google-red, "angular-js.svg");
-@include codelab-card([ "express", "Express" ], $color-google-red, "express.svg");
+@include codelab-card([ "angular", "Angular" ], $color-google-red, "angular.svg");
+@include codelab-card([ "express", "Express" ], $color-openthread-grey, "express.svg");
 @include codelab-card([ "nodejs", "NodeJs", "NodeJS" ], $color-google-green, "nodejs.svg");
 @include codelab-card([ "mongodb", "MongoDB", "mongoDB" ], $color-google-green, "mongo-db.svg");
+@include codelab-card([ "mean" ], $color-ar-core-purple, "mean.png");
 
 /* Actual CSS classes */
 

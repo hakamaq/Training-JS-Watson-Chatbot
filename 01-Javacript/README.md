@@ -1,11 +1,11 @@
 id: js-basic
 summary: Javascript introduction
 categories: javascript
-status: Published
+status: Hidden
 authors: Hakam Abdelqader
 Feedback Link: mailto:hakam.abdelqader@ibm.com
 
-# Javascript Introduction
+# 01-Javascript Introduction
 
 <!-- ------------------------ -->
 ## Introduction 

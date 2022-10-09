@@ -3,10 +3,10 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2022-10-05T07:24:05+03:00",
+  "updated": "2022-10-09T06:52:48+03:00",
   "id": "06-angular",
   "duration": 10,
-  "title": "Angular Complete Crash Course",
+  "title": "06-Angular vs React",
   "authors": "Hakam Abdelqader",
   "summary": "Angular Introduction",
   "source": "README.md",
@@ -15,7 +15,8 @@
     "published"
   ],
   "category": [
-    "angular"
+    "angular",
+    "react"
   ],
   "tags": [],
   "feedback": "mailto:hakam.abdelqader@ibm.com",

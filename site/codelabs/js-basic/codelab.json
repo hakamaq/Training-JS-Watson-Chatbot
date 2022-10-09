@@ -3,21 +3,21 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2022-10-09T06:44:38+03:00",
-  "id": "05-mongoDB",
-  "duration": 0,
-  "title": "05-MongoDB",
+  "updated": "2022-10-09T06:46:45+03:00",
+  "id": "js-basic",
+  "duration": 7,
+  "title": "01-Javascript Introduction",
   "authors": "Hakam Abdelqader",
-  "summary": "Understand the CRUD meti",
+  "summary": "Javascript introduction",
   "source": "README.md",
   "theme": "",
   "status": [
-    "published"
+    "hidden"
   ],
   "category": [
-    "mongodb"
+    "javascript"
   ],
   "tags": [],
   "feedback": "mailto:hakam.abdelqader@ibm.com",
-  "url": "05-mongoDB"
+  "url": "js-basic"
 }

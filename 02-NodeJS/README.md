@@ -7,7 +7,7 @@ Feedback Link: mailto:hakam.abdelqader@ibm.com
 environments: Web, polymer-summit
 analytics account: G-QSKGLX6MT6
 
-# Introduction to NodeJS 
+# 02-NodeJS 
 Background / Summary of the Labs.
 
 <!-- ------------------------ -->

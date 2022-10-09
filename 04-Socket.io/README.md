@@ -5,7 +5,7 @@ status: Published
 authors: Hakam
 Feedback Link: mailto:hakam.abdelqader
 
-# WebSockets and Socket.io
+# 04-WebSockets and Socket.io
 
 <!-- ------------------------ -->
 ## Setting up Express 
@@ -477,3 +477,32 @@ Make sure to restart your server to use your new code.
 Once you do, you should be able to open multiple tabs on your browser, give each tab a unique name, chat across all of them in real-time, leave and join and see the messages on the other clients, just as you would expect.
 
 While this is a simple example of using Socket.io, it is very powerful and supports many more features than the ones shown here. 
+
+
+<!-- ------------------------ -->
+## Different ways to send messages
+
+Here are the ways you can send a message from the server to the client:
+
+```js
+// sending to sender only
+socket.emit("message", "value");
+
+// sending to all clients, including sender
+io.emit("message", "value");
+
+// sending to all clients except sender
+socket.broadcast.emit("message", "value");
+
+// sending to all clients in room except sender
+socket.broadcast.to("ROOM").emit("message", "value");
+
+// sending to all clients in room including sender
+io.to("ROOM").emit("message", "value");
+
+// sending to sender only if they are in the room
+socket.to("ROOM").emit("message", "value");
+
+// sending to individual Socket ID
+socket.broadcast.to("SOCKETID").emit("message", "value");
+```

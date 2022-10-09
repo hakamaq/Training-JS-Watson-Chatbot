@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Express Framework</title>
+  <title>03-Express Framework</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
@@ -21,9 +21,9 @@
 </head>
 <body>
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
+  <google-codelab codelab-gaid="G-QSKGLX6MT6"
                   id="03-express"
-                  title="Express Framework"
+                  title="03-Express Framework"
                   environment="web"
                   feedback-link="mailto:hakam.abdelqader@ibm.com">
     
@@ -96,9 +96,8 @@ app.listen(PORT, () =&gt; {
 &lt;/html&gt;
 </code></pre>
 <p>To serve static files, we&#39;ll need to add a simple line to our main file.</p>
-<pre><code language="language-js" class="language-js"></code></pre>
-<p>app.use(express.static(<code>${__dirname}/</code>))</p>
-<p>&#34;&#34;&#34;</p>
+<pre><code language="language-js" class="language-js">app.use(express.static(`${__dirname}/`))
+</code></pre>
 <p><em>Note: The global variable </em></p>
 <p><em><code>__dirname</code></em></p>
 <p><em> is the path to your NodeJS project folder.</em></p>
@@ -110,12 +109,10 @@ app.listen(PORT, () =&gt; {
       <google-codelab-step label="Express Framework" duration="0">
         <p>Express is a web framework for Node.js. Using Express you can build web applications, REST APIs, frameworks quickly and efficiently.</p>
 <p>First, create a new folder and initialize it with a blank <strong>package.json</strong> file using the command below.</p>
-<pre><code language="language-js" class="language-js">npm init --y
-
+<pre><code language="language-sh" class="language-sh">npm init -y
 </code></pre>
 <p>To install the latest and stable version Express in your project, run the following command.</p>
-<pre><code language="language-js" class="language-js">npm install --save express
-
+<pre><code language="language-sh" class="language-sh">npm install --save express
 </code></pre>
 <p>Upon execution of this command, you will have the express framework installed in your project. Let&#39;s create a sample code to test out Express framework.</p>
 <pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;);
@@ -126,14 +123,12 @@ app.get(&#39;/&#39;,(req,res)=&gt;{
  res.send(&#34;Hello&#34;);
 });
 
-
-
 app.listen(process.env.port||3000);
 
 console.log(&#39;Web Server is listening at port &#39;+(process.env.port||3000));
 </code></pre>
 <p>Run this code using the following command.</p>
-<pre><code language="language-js" class="language-js">node app.js
+<pre><code language="language-sh" class="language-sh">node app.js
 </code></pre>
 <p>Navigate your browser to <strong>localhost:3000</strong> to view the response of the web server.</p>
 <p>Let&#39;s learn about Express routers.</p>
@@ -198,7 +193,6 @@ console.log(&#39;Web Server is listening at port &#39;+(process.env.port||3000))
 </code></pre>
 <p>You should see the following message in the terminal.</p>
 <pre><code>Web Server is listening at port 3000
-
 </code></pre>
 <p>Open your browser and visit the routes.</p>
 <p class="image-container"><img src="img/923ae7ed71d75e68.png"></p>
@@ -261,11 +255,10 @@ console.log(&#39;Web Server is listening at port &#39;+(process.env.port||3000))
 <pre><code language="language-js" class="language-js">app.use((err, req, res, next)=&gt;{
  res.status(500).send(&#39;Something broke!&#39;)
 });
-
 </code></pre>
 <p>Express provides some middleware by default such as <strong>express.static()</strong>,<strong>express.json()</strong> and <strong>express.urlencoded()</strong>.</p>
 <p>We can use third-party middlewares built by awesome developers like you. Here is how we can install third-party middleware.</p>
-<pre><code language="language-js" class="language-js">npm install --save body-parser
+<pre><code language="language-sh" class="language-sh">npm install --save body-parser
 
 </code></pre>
 <p>Here is how we can use this third-party express middleware.</p>
@@ -324,8 +317,7 @@ console.log(&#39;Web Server is listening at port &#39;+(process.env.port||3000))
       <google-codelab-step label="Express Sessions Management" duration="0">
         <p>Session management is a crucial part of the web application. We can use third-party middleware to achieve the session functionality in the Express framework.</p>
 <p>Let&#39;s install the middleware.</p>
-<pre><code language="language-js" class="language-js">npm install --save express-session
-
+<pre><code language="language-sh" class="language-sh">npm install --save express-session
 </code></pre>
 <p>Here is a sample code to achieve sessions in Express.</p>
 <pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;);

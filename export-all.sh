@@ -1,7 +1,7 @@
 #!/bin/sh
-for d in ./site/codelabs/*/
+for d in ./*/
   do 
-    if [$d === './site' || $d === './example-cl']; then 
+    if [$d === './site']; then 
       break
     fi 
     (cd "$d" && ./export.sh); 
