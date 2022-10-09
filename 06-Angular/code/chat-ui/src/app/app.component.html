@@ -1,7 +1,8 @@
-<main>
+<main class="wrapper">
   <header class="messager-header">Chat bot</header>
-  <section class="messager-chat">
-    <app-messages text=""></app-messages>
+  <div class="messager-chat" #chat>
+    <app-messages></app-messages>
+  </div>
     <div class="messager-inputarea">
       <input
         type="text"
@@ -17,5 +18,4 @@
         Send
       </button>
     </div>
-  </section>
 </main>
