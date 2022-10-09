@@ -61,13 +61,24 @@ const waitingSavingDatabase = new Promise((resolve, reject) => {
     reject("Doesn't work")
   }
   // resolve("I am done!")
-  setTimeout(() => resolve("I am done!"), 3000)
+  setTimeout(() => resolve("I am done!"), 5000)
 })
 waitingSavingDatabase
 .then((value) => {
   console.log("value", value)
+  return "hel"
 })
+.then()
 .catch((err) =>{ console.log("error", err)})
+async function getUsers(){
+  try{
+    const result = await waitingSavingDatabase
+    console.log("I'm inside the try block")
+  }catch(err){
+    
+  }
+  
+}
 
 /// METHOD 2
 waitingSavingDatabase
@@ -76,6 +87,7 @@ waitingSavingDatabase
 },
 (err) =>{ console.log("error", err)})
 
+console.log("exceuted")
 
 const fruits = ["Apple", "Banana", "Mango", "Pineapple"]
 
