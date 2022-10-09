@@ -1,15 +1,14 @@
 id: 07-mean-chatbot
 summary: Summary of lab
-categories: Angular, nodejs, express, mongodb
+categories: MEAN, Angular, nodejs, express, mongodb
 status: Published
 authors: Hakam Abdelqader
 Feedback Link: mailto:hakam.abdelqader@ibm.com
 
-# Angular Chatbot + NodeJs + Express + mongodb
+# 07-MongoDB + Express  + Angular + NodeJs Chatbot
 
 <!-- ------------------------ -->
 ## Introduction 
-Duration: hh:mm:ss
 
 I’ll take you through building a chat application with Angular.
 I will be using the conceps we used in **NodeJs** and **Express**.
@@ -23,6 +22,14 @@ Here’s how the final application will look like:
 
 ### Final Output
 ![](./images/2022-10-09-03-30-50.png)
+
+<!-- ------------------------ -->
+## Agenda 
+Duration: 00:01:00
+
+### Weeks agenda 
+![](./images/agenda.png)
+
 
 <!-- ------------------------ -->
 ## Setup project 
@@ -376,9 +383,24 @@ For your reference however here is the explanation of ever file and folder creat
 [Reference](https://hackernoon.com/folder-structure-of-angular-applications-9a2234hp)
 
 <!-- ------------------------ -->
-## app.component.ts 
+## Base Component + Generate Component 
+
+
+At the client-side, we’ll use MVC pattern-based framework Angular. We’ll have only a single page for getting input from the user, For that we only create one service file for connecting to IBM watson services apis we created in the server.
+
+Components are the core building blocks for Angular apps. Components are like lego pieces they are small segments of code that make up entire application or if we are building legos the whole lego model
+
+Components have 3 main aspects:
+
+-   An HTML file for the template.
+-   A CSS file for the styles.
+-   A TypeScript file for the behavior of the app.
+
+The first component you're going to update is `AppComponent`.
+
 
 Angular creates an `index.html` which references our selector in the `app.component.ts`
+
 
 ```html
 <!doctype html>
@@ -395,5 +417,55 @@ Angular creates an `index.html` which references our selector in the `app.compon
 </body>
 </html>
 
-``` 
-### app.component.ts
+```
+### **Empty** `app.component.ts`
+
+```js
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+```
+### Steps
+
+1.  Open `app.component.html` in your code editor; this is the template file for the `AppComponent`.
+2.  Delete all the code in this file and replace it with this:
+
+```html
+<main>
+  <header>Chat bot</header>
+  <section>
+  </section>
+</main>
+
+```
+
+<!-- ------------------------ -->
+## Generate Component
+
+The project has two component, and we will be addiing a third which is the login system that will integrate mongodb connection on the server-side.
+
+You can create files for a component manually or using the Angular CLI command. Angular CLI reduces the development time. So, let's use Angular CLI to create a new component.
+
+Use the following CLI command to generate our second component.
+
+```sh
+ng generate component messages
+```
+
+![](./images/2022-10-05-06-14-31.png)
+
+<!-- ------------------------ -->
+##  app.component.html
+
