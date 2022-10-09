@@ -1,0 +1,407 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>02-NodeJS</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-QSKGLX6MT6"
+                  id="02-node-js"
+                  title="02-NodeJS"
+                  environment="web"
+                  feedback-link="mailto:hakam.abdelqader@ibm.com">
+    
+      <google-codelab-step label="Introduction" duration="2">
+        <p>Background / Summary of the Labs.</p>
+<h2 is-upgraded>What you&#39;ll build</h2>
+<p>In this session, you&#39;ll build a pure NodeJS chatbot. The completed app will allow a user to put in the name and join into a group chat. You&#39;ll build everything with NodeJs using the native HTTP module. This is the app you&#39;ll be building today</p>
+<h2 is-upgraded>Concepts we will cover</h2>
+<ul>
+<li>JavaScript Overview</li>
+<li>JavaScript Object-Oriented Programming</li>
+<li>JavaScript Scope</li>
+<li>NodeJS</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Agenda" duration="1">
+        <h2 is-upgraded>Weeks agenda</h2>
+<p class="image-container"><img src="img/738a473ed32b223b.png"></p>
+<p>Codelab: Introduction to NodeJS</p>
+<p>This codelab will go through the process of creating a simple NodeJS application. We will learn how to initialize a new NodeJS project, install packages, send requests and handle events</p>
+<p>If at any point during this tutorial you&#39;re lost or your code is not working, you can check the final files listed in this repository.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Node.js Global variables __filename" duration="0">
+        <p>Node.js global objects are global in nature and they are available in all modules. We do not need to include these objects in our application, rather we can use them directly. These objects are modules, functions, strings and object itself as explained below.</p>
+<h2 is-upgraded>__filename</h2>
+<p>The_filename represents the filename of the code being executed. This is the resolved absolute path of this code file. For a main program this is not necessarily the same filename used in the command line. The value inside a module is the path to that module file.</p>
+<h2 is-upgraded>Example</h2>
+<p>Create a js file named main.js which has the following code:</p>
+<pre><code language="language-js" class="language-js">// Let&#39;s try to print the value of
+filename
+console.log(__filename);
+
+</code></pre>
+<p>Now run the main.js to see the result:</p>
+<pre><code language="language-bash" class="language-bash">$ node main.js
+</code></pre>
+<p>Based on the location of your program, it will print main file name as follows:</p>
+<pre><code language="language-text" class="language-text">/web/com/1427091028_21099/main.js
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Node.js Global variables __dirname" duration="0">
+        <h2 is-upgraded>__dirname</h2>
+<p>The _dirname represents the name of the directory that the currently executing script resides in.</p>
+<h2 is-upgraded>Example</h2>
+<p>Create a js file named main.js which has the following code:</p>
+<pre><code language="language-js" class="language-js">// Let&#39;s try to print the value of _dirname
+console.log(_dirname);
+</code></pre>
+<p>Now run the main.js to see the result:</p>
+<pre><code language="language-bash" class="language-bash">$ node main.js
+</code></pre>
+<p>Based on the location of your program, it will print current directory name as follows:</p>
+<pre><code language="language-text" class="language-text">/web/com/1427091028_21099
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Using the 
+fs Module" duration="0">
+        <p>In Node Application, any async function accepts a callback as a last parameter and the callback function accepts error as a first parameter. Let&#39;s revisit the previous example again. Create a text file named input.txt having following content</p>
+<pre><code language="language-text" class="language-text">We are here at Aramco learrning NodeJS and building our chatbots !!!!!
+</code></pre>
+<p>Create a js file named main.js having the following code:</p>
+<pre><code language="language-js" class="language-js">var_fs = require(&#34;fs&#34;);
+fs.readFile(&#39;input.txt&#39;, function(err, data) { 
+    if (err) {
+        console.log(err.stack); 
+        return;
+    }
+    console.log(data.toString() ); 
+});
+console.log(&#34;Program Ended&#34;);
+</code></pre>
+<p>Finally prints the content.</p>
+<pre><code language="language-text" class="language-text">Program Ended 
+We are here at Aramco learrning NodeJS and building our chatbots !!!!!
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Node.js Streams" duration="0">
+        <h2 is-upgraded>What are Streams?</h2>
+<p>Streams are objects that let you read data from a source or write data to a destination in continous fashion. In Node.js, there are four types of streams.</p>
+<aside class="special"><p>1. Readable - Stream which is used for read operation.  </p>
+<ol type="1">
+<li>Writable - Stream which is used for write operation.<br></li>
+<li>Duplex - Stream which can be used for both read and write operation.</li>
+<li>Transform - A type of duplex stream where the output is computed based on input.</li>
+</ol>
+</aside>
+<h2 is-upgraded>Types of Streams</h2>
+<p>Each type of Stream is an EventEmitter instance and throws several events at different instance of times. For example, some of the commonly used events are:</p>
+<ol type="1">
+<li>data - This event is fired when there is data is available to read.<br></li>
+<li>end - This event is fired when there is no more data to read.</li>
+<li>error - This event is fired when there is any error receiving or writing data.<br></li>
+<li>finish - This event is fired when all data has been flushed to underlying system</li>
+</ol>
+<p>This tutorial will give you understanding on commonly used operations on Streams.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Reading from stream" duration="0">
+        <p>Create a text file named <code>input.txt</code> having following content:</p>
+<pre><code language="language-text" class="language-text">We are here at Aramco learrning NodeJS and building our chatbots !!!!!
+</code></pre>
+<p>Create a js file named main.js which has the following code:</p>
+<pre><code language="language-js" class="language-js">var fs = require(&#34;fs&#34;);
+var data = &#34;&#34;;
+// Create a readable stream 
+var readerStream = fs.createReadStream(&#39;input.txt&#39;);
+
+// Set the encoding to be utf8. 
+readerStream.setEncoding(&#39;UTF8&#39;);
+
+// Handle stream events --&gt; data, end, and error 
+readerStream.on(&#39;data&#39;, function (chunk) {
+  data += chunk;
+});
+readerStream.on(&#39;end&#39;, function () {
+  console.log(data);
+});
+readerStream.on(&#39;error&#39;, function (err) {
+  console.log(err.stack);
+});
+
+console.log(&#34;Program Ended&#34;);
+</code></pre>
+<p>Now run the main.js to see the result:</p>
+<pre><code>$ node main.js
+
+</code></pre>
+<h2 is-upgraded>Verify the Output</h2>
+<pre><code language="language-text" class="language-text">Program Ended
+We are here at Aramco learrning NodeJS and building our chatbots !!!!!
+``` 
+&lt;!-- ------------------------ --&gt;
+## Writing to stream
+Create a js file named main.js which has the following code:
+
+```js
+var fs = require(&#34;fs&#34;);
+var data = &#34;Learning is Easy&#34;;
+
+// Create a writable stream
+var writerStream = fs.createWriteStream(&#34;output.txt&#34;);
+
+// Write the data to stream with encoding to be utf8
+writerStream.write(data, &#34;UTF8&#34;);
+
+// Mark the end of file
+writerStream.end();
+// Handle stream events --&gt; finish, and error
+writerStream.on(&#34;finish&#34;, function () {
+  console.log(&#34;Write completed.&#34;);
+});
+writerStream.on(&#34;error&#34;, function (err) {
+  console.log(err.stack);
+});
+console.log(&#34;Program Ended&#34;);
+</code></pre>
+<p>Now run the main.js to see the result:</p>
+<pre><code language="language-bash" class="language-bash">$ node main.js
+</code></pre>
+<p>Verify the Output</p>
+<pre><code language="language-text" class="language-text">Program Ended 
+Write completed.
+</code></pre>
+<p>Now open output.txt created in your current directory and verify the following content available in output.txt file.</p>
+<pre><code language="language-text" class="language-text">Simply Easy Learning
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Pipeing Streams" duration="0">
+        <p>Piping is a mechanism where we provide output of one stream as the input to another stream. It is normally used to get data from one stream and to pass output of that stream to another stream. There is no limit on piping operations. Now we&#39;ll show a piping example for reading from one file and writing it to another file.</p>
+<p>Create a js file named main.js which has the following code:</p>
+<pre><code language="language-js" class="language-js">var fs = require(&#34;fs&#34;);
+
+// Create a readable stream 
+var readerStream = fs.createReadStream(&#39;input.txt&#39;);
+
+// Create a writable stream 
+var writerStream = fs.createWriteStream(&#39;output.txt&#39;);
+// Pipe the read and write operations 
+
+// read input.txt and write data to output.txt 
+readerStream.pipe(writerStream);
+console.log(&#34;Program Ended&#34;);
+</code></pre>
+<p>Now run the main.js to see the result:</p>
+<pre><code language="language-text" class="language-text">$ node main.js
+</code></pre>
+<h2 is-upgraded>Verify the Output</h2>
+<pre><code language="language-text" class="language-text">Program Ended
+</code></pre>
+<p>Open output.txt created in your current directory and verify the following content available in output.txt file.</p>
+<pre><code language="language-text" class="language-text">We are here at Aramco learrning NodeJS and building our chatbots !!!!!
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Node.js - Event Loop" duration="0">
+        <p>Node js is a single threaded application but it support concurrency via concept of event and callbacks. As every API of Node js are asynchronous and being a single thread, it uses async function calls to maintain the concurrency. Node uses observer pattern. Node thread keeps an event loop and whenever any task get completed, it fires the corresponding event which signals the event listener function to get executed. Event Driven Programming Node.js uses events heavily and it is also one of the reasons why Node.js is pretty fast compared to other similar technologies. As soon as Node starts its server, it simply initiates its variables, delcares functions and then simply waits for event to occur. In an event-driven application, there is generally a main loop that listens for events, and then triggers a callback function when one of those events is detected.</p>
+<p class="image-container"><img src="img/e36d80afd667717b.png"></p>
+<p>While Events seems similar to what callbacks are. The difference lies in the fact that callback functions are called when an asynchronous function returns its result where as event handling works on the observer pattern. The functions which listens to events acts as Observers. Whenever an event gets fired, its listener function starts executing. Node.js has multiple in-built events available through events module and EventEmitter class which is used to bind events and event listeners as follows:</p>
+<pre><code language="language-js" class="language-js">// Import events module 
+var events = require(&#39;events&#39;); 
+// Create an eventEmitter object 
+var eventEmitter = new events. EventEmitter();
+</code></pre>
+<p>Following is the syntax to bind event handler with an event:</p>
+<pre><code language="language-js" class="language-js">// Bind event and even handler as follows 
+eventEmitter.on(&#39;eventName&#39;, eventHandler);
+</code></pre>
+<p>We can fire an event programatically as follows:</p>
+<pre><code language="language-js" class="language-js">// Fire an event 
+eventEmitter.emit(&#39;eventName&#39;);
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Event Loop Example" duration="0">
+        <p>Create a js file named main.js having the following code:</p>
+<pre><code language="language-js" class="language-js">// Import events module 
+var events = require(&#39;events&#39;); 
+
+// Create an eventEmitter object 
+var eventEmitter = new events. EventEmitter();
+
+// Create an event handler as follows 
+var connectHandler = function connected () {
+    console.log(&#39;connection succesful.&#39;);
+    
+    // Fire the data_received event 
+    eventEmitter.emit(&#39;data_received&#39;);
+}
+
+// Bind the connection event with the handler 
+eventEmitter.on(&#39;connection&#39;, connectHandler);
+
+// Bind the data received event with the anonymous function 
+eventEmitter.on(&#39;data_received&#39;, function () {
+    console.log(&#39;data received succesfully.&#39;);
+});
+
+// Fire the connection event 
+eventEmitter.emit(&#39;connection&#39;);
+
+console.log(&#34;Program Ended.&#34;);
+</code></pre>
+<p>Now let&#39;s try to run the above program as check the output:</p>
+<pre><code language="language-bash" class="language-bash">$ node main.js
+</code></pre>
+<p>This will produce following result:</p>
+<pre><code>connection succesful. 
+data received succesfully. 
+Program Ended.
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Node.js - Event Emitter" duration="0">
+        <p>Many objects in Node emit events for example a net.Server emits an event each time a peer connects to it, a fs.readStream emits an event when the file is opened. All objects which emit events are instances of events.EventEmitter.</p>
+<h2 is-upgraded>EventEmitter Class</h2>
+<p>As we have seen in previous section, EventEmitter class lies in events module. It is accessibly via following syntax:</p>
+<pre><code language="language-js" class="language-js">// Import events module 
+var events = require(&#39;events&#39;); 
+
+// Create an eventEmitter object 
+var eventEmitter = new events. EventEmitter();
+</code></pre>
+<p>When an EventEmitter instance faces any error, it emits an ‘error&#39; event. When new listener is added, ‘newListener&#39; event is fired and when a listener is removed, ‘removeListener&#39; event is fired.</p>
+<p>EventEmitter provides multiple properties like on and emit. on property is used to bind a function with the event and emit is used to fire an event.</p>
+<h2 is-upgraded>Methods</h2>
+<ul>
+<li><strong>addListener(event, listener)</strong> Adds a listener to the end of the listeners array for the specified event. No checks are made to see if the listener has already been added. Multiple calls passing the same combination of event and listener will result in the listener being added multiple times. Returns emitter, so calls can be chained.</li>
+<li><strong>on(event, listener)</strong> Adds a listener to the end of the listeners array for the specified event. No checks are made to see if the listener has already been added. Multiple calls passing the same combination of event and listener will result in the listener being added multiple times. Returns emitter, so calls can be chained.</li>
+<li><strong>emit(event, [arg1], [arg2], [...])</strong> Execute each of the listeners in order with the supplied arguments. Returns true if event had listeners, false otherwise.</li>
+<li><strong>once(event, listener)</strong> Adds a one time listener for the event. This listener is invoked only the next time the event is fired, after which it is removed. Returns emitter, so calls can be chained.</li>
+<li><strong>removeListener(event, listener)</strong> Remove a listener from the listener array for the specified event. Caution: changes array indices in the listener array behind the listener. removeListener will remove, at most, one instance of a listener from the listener array. If any single listener has been added multiple times to the listener array for the specified event, then removeListener must be called multiple times to remove each instance. Returns emitter, so calls can be chained.</li>
+<li><strong>removeAllListeners([event])</strong> Removes all listeners, or those of the specified event. It&#39;s not a good idea to remove listeners that were added elsewhere in the code, especially when it&#39;s on an emitter that you didn&#39;t create (e.g. sockets or file streams). Returns emitter, so calls can be chained.</li>
+<li><strong>setMaxListeners(n)</strong> By default EventEmitters will print a warning if more than 10 listeners are added for a particular event. This is a useful default which helps finding memory leaks. Obviously not all Emitters should be limited to 10. This function allows that to be increased. Set to zero for unlimited.<br></li>
+<li><strong>listeners(event)</strong> Returns an array of listeners for the specified event.</li>
+</ul>
+<h2 is-upgraded>Class Methods</h2>
+<ul>
+<li><strong>listenerCount(emitter, event)</strong> Return the number of listeners for a given event.</li>
+<li><strong>newListener event -</strong> String The event name listener - Function The event handler function This 1. event is emitted any time a listener is added. When this event is triggered, the listener may not yet have been added to the array of listeners for the event.</li>
+<li><strong>removeListener event -</strong> String The event name listener - Function The event handler function This 2 event is emitted any time someone removes a listener. When this event is triggered, the listener may not yet have been removed from the array of listeners for the event.</li>
+</ul>
+<p>:</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Event Emitter Example" duration="0">
+        <p>Create a js file named main.js with the following Node.js code:</p>
+<pre><code language="language-js" class="language-js">var events = require(&#39;events&#39;); 
+var { EventEmitter } = require(&#39;events&#39;); 
+var eventEmitter = new events.EventEmitter();
+
+// listener #1 
+var user1 = function user1() {
+console.log(&#39;User 1 created&#39;);
+}
+
+// listener #2 
+var user2 = function user2() {
+console.log(&#39;User 2 created.&#39;); 
+}
+// Bind the connection event with the user1 function
+ eventEmitter.addListener(&#39;connection&#39;, user1);
+
+// Bind the connection event with the user2 function
+ eventEmitter.on(&#39;connection&#39;, user2);
+
+var eventListeners = EventEmitter.listenerCount(eventEmitter, &#39;connection&#39;);
+console.log(eventListeners + &#34; Listner(s) listening to connection event&#34;);
+
+// Fire the connection event 
+eventEmitter.emit(&#39;connection&#39;);
+
+// Remove the binding of user1 function eventEmitter. removeListener(&#39;connection&#39;, user1); 
+console.log(&#34;User1 will not listen now.&#34;);
+
+// Fire the connection event 
+eventEmitter.emit(&#39;connection&#39;);
+
+eventListeners =  EventEmitter.listenerCount(eventEmitter, &#39;connection&#39;);
+console.log(eventListeners + &#34; Listner(s) listening to connection event&#34;);
+
+
+console.log(&#34;Program Ended.&#34;);
+</code></pre>
+<p>Now run the main.js to see the result:</p>
+<pre><code>$ node main.js
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Chatbot Pure NodeJs Example" duration="0">
+        <p>Run the code the code on your system and give it a try:</p>
+<p class="image-container"><img alt="https://codesandbox.io/embed/stupefied-payne-wupom1?fontsize=14&amp;hidenavigation=1&amp;theme=dark" src="img/c17fccf2d5e3ab26.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Congratulations!" duration="0">
+        <p>You have successfully have the knowledge to handle events deal with file systems in NodeJS application using  FS (file system)!</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

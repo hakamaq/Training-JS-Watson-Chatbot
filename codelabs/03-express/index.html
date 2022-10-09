@@ -1,0 +1,478 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>03-Express Framework</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid="G-QSKGLX6MT6"
+                  id="03-express"
+                  title="03-Express Framework"
+                  environment="web"
+                  feedback-link="mailto:hakam.abdelqader@ibm.com">
+    
+      <google-codelab-step label="Topics we will cover" duration="0">
+        <ol type="1">
+<li>Node.js Basic Concepts</li>
+<li>Installing Node.js in your system</li>
+<li>Express framework</li>
+<li>Express Routers</li>
+<li>Express Middlewares</li>
+<li>Creating a Web Server using Express.</li>
+<li>Express Sessions.</li>
+<li>Express File uploads</li>
+<li>Database interfacing with Node.js.</li>
+<li>Deployment of Node.js applications.</li>
+</ol>
+<h2 is-upgraded>Basic initiation of the project</h2>
+<p>To begin creating the application, type the following lines into your terminal.</p>
+<pre><code>$ mkdir myapp
+$ cd myapp
+$ npm init
+$ npm install express --save
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="The Setup" duration="0">
+        <p>First we need to install NodeJS if it is not already done. Head over to https://nodejs.org and install the latest LTS version.</p>
+<p>Once NodeJS installed, create a new folder for our new NodeJS project. Navigate to your new folder in your terminal and execute <code>npm init</code>. You&#39;ll have to choose a title, description and other options for our project. I called my main file <code>index.js</code>.</p>
+<p>That&#39;s all for the setup phase, let&#39;s start coding!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Web server with ExpressJS" duration="0">
+        <p>Let&#39;s launch a web server using ExpressJS! First, we need to install the <code>express</code> package. To install a package simply execute <code>npm install --save <package-name></code>, in our case, the package name is <code>express</code> so we will enter <code>npm install --save express</code>.</p>
+<p>Now, we&#39;ll need to create our <code>index.js</code> file. This file will be the main file we will be using.</p>
+<p>Let&#39;s start by adding our <code>express</code> module to our code.</p>
+<pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;)
+</code></pre>
+<p><em>Note: NodeJS now supports ESNext (ES6+). You can use let/const, async/await, and all the cool features available in new versions of JavaScript.</em></p>
+<p>Now, let&#39;s initialize a new web server.</p>
+<pre><code language="language-js" class="language-js">const app = express()
+</code></pre>
+<p>And we can finally launch our web server on the port of our choice. Let&#39;s say <code>3000</code>. We&#39;ll also add an index route to our server.</p>
+<pre><code language="language-js" class="language-js">const PORT = 3000
+
+app.get(&#39;/&#39;, (req, res) =&gt; {
+    res.send(&#39;Hello World!&#39;)
+})
+
+app.listen(PORT, () =&gt; {
+    console.log(`Server listening on port ${PORT}...`)
+})
+</code></pre>
+<p><em>Note: logs/warnings/errors will be displayed in the terminal used to launch your NodeJS application.</em></p>
+<p>That&#39;s it! We&#39;re done. We have a running web server. Let&#39;s run our code by executing <code>node index.js</code>. Yay! The server is running! We can go to http://localhost:3000 and check if our server works.</p>
+<p>Let&#39;s create a proper static HTML file to serve. We&#39;ll create a new folder called <code>static</code> and create <code>hello.html</code>. Let&#39;s add some code into it.</p>
+<pre><code language="language-html" class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&#34;UTF-8&#34;&gt;
+        &lt;title&gt;Hello!&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hello Express thanks for making my life easy!&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>To serve static files, we&#39;ll need to add a simple line to our main file.</p>
+<pre><code language="language-js" class="language-js">app.use(express.static(`${__dirname}/`))
+</code></pre>
+<p><em>Note: The global variable </em></p>
+<p><em><code>__dirname</code></em></p>
+<p><em> is the path to your NodeJS project folder.</em></p>
+<p>If we relaunch our application with <code>node index.js</code>, and go to http://localhost:3000/hello.html, we should see the content of our HTML file!</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Express Framework" duration="0">
+        <p>Express is a web framework for Node.js. Using Express you can build web applications, REST APIs, frameworks quickly and efficiently.</p>
+<p>First, create a new folder and initialize it with a blank <strong>package.json</strong> file using the command below.</p>
+<pre><code language="language-sh" class="language-sh">npm init -y
+</code></pre>
+<p>To install the latest and stable version Express in your project, run the following command.</p>
+<pre><code language="language-sh" class="language-sh">npm install --save express
+</code></pre>
+<p>Upon execution of this command, you will have the express framework installed in your project. Let&#39;s create a sample code to test out Express framework.</p>
+<pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;);
+const app = express();
+
+
+app.get(&#39;/&#39;,(req,res)=&gt;{
+ res.send(&#34;Hello&#34;);
+});
+
+app.listen(process.env.port||3000);
+
+console.log(&#39;Web Server is listening at port &#39;+(process.env.port||3000));
+</code></pre>
+<p>Run this code using the following command.</p>
+<pre><code language="language-sh" class="language-sh">node app.js
+</code></pre>
+<p>Navigate your browser to <strong>localhost:3000</strong> to view the response of the web server.</p>
+<p>Let&#39;s learn about Express routers.</p>
+<h2 is-upgraded>Hello world Express application</h2>
+<p>Add the following code to an app.js file in the myapp directory. Now we have a Node.js application running with the express framework thanks to this simple configuration.</p>
+<pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;)
+const app = express()
+const port = 3000
+
+app.use(express.static(`${__dirname}/static/`))
+// app.get(&#39;/&#39;, (req, res) =&gt; {res.send(&#39;Hello World!&#39;)
+// })
+app.listen(port, () =&gt; {console.log(`Example app listening at http://localhost:${port}`)
+</code></pre>
+<p>This tutorial is for Node.js and Express Beginners. Express is a node.js web development framework which comes with various features you require to build end-to-end web application such as routing, parsing, render engine support, etc.</p>
+<p>In this Node.js tutorial for beginners, we are going to cover the following topics:</p>
+<p>Let&#39;s begin.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Express Routers" duration="0">
+        <p>Routers are simply an endpoint of a server.</p>
+<p>For example, chatbot.aramco.com.sa/home, here the <strong>home</strong> is a route.</p>
+<p>We can perform various operations on routes using HTTP methods such as GET, POST, PUT, and DELETE.</p>
+<p>Let&#39;s learn by doing it. Refer to the code shown below.</p>
+<pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;);
+const app = express();
+const router = express.Router();
+
+
+router.get(&#39;/home&#39;,(req,res)=&gt;{
+ res.send(&#39;Hello World, This is home router&#39;);
+});
+
+
+router.get(&#39;/profile&#39;,(req,res)=&gt;{
+ res.send(&#39;Hello World, This is profile router&#39;);
+});
+
+
+router.get(&#39;/login&#39;,(req,res)=&gt;{
+ res.send(&#39;Hello World, This is login router&#39;);
+});
+
+
+router.get(&#39;/logout&#39;,(req,res)=&gt;{
+ res.send(&#39;Hello World, This is logout router&#39;);
+});
+
+
+app.use(&#39;/&#39;, router);
+
+
+app.listen(process.env.port||3000);
+
+
+console.log(&#39;Web Server is listening at port &#39;+(process.env.port||3000));
+</code></pre>
+<p>Let&#39;s run our application, save the file, and run the code using the following command.</p>
+<pre><code>node app.js
+</code></pre>
+<p>You should see the following message in the terminal.</p>
+<pre><code>Web Server is listening at port 3000
+</code></pre>
+<p>Open your browser and visit the routes.</p>
+<p class="image-container"><img src="img/923ae7ed71d75e68.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Express Middlewares" duration="0">
+        <p>There are five types of middleware functions in the express.</p>
+<ul>
+<li>Application middleware</li>
+<li>Router middleware</li>
+<li>Error-handling middleware</li>
+<li>Built-in middleware</li>
+<li>Third-party middleware</li>
+</ul>
+<p>We can use application middleware using the instance of the express. For example:</p>
+<pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;);
+const app = express();
+
+
+app.use((req, res, next)=&gt;{
+ console.log(&#39;Time:&#39;,Date.now());
+ next();
+});
+
+
+app.listen(process.env.port||3000);
+
+
+console.log(&#39;Web Server is listening at port &#39;+(process.env.port||3000));
+
+</code></pre>
+<p>In a similar way as application middleware, we can use router middleware. For example:</p>
+<pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;);
+const app = express();
+const router = express.Router();
+
+
+router.use((req, res, next)=&gt;{
+ console.log(&#39;Time:&#39;,Date.now());
+ next();
+});
+
+
+router.get(&#39;/home&#39;,(req,res)=&gt;{
+ res.send(&#34;ok&#34;)
+});
+
+
+app.use(&#39;/&#39;, router);
+
+app.listen(process.env.port||3000);
+
+
+console.log(&#39;Web Server is listening at port &#39;+(process.env.port||3000));
+
+</code></pre>
+<p>We can use this middleware to catch errors.</p>
+<pre><code language="language-js" class="language-js">app.use((err, req, res, next)=&gt;{
+ res.status(500).send(&#39;Something broke!&#39;)
+});
+</code></pre>
+<p>Express provides some middleware by default such as <strong>express.static()</strong>,<strong>express.json()</strong> and <strong>express.urlencoded()</strong>.</p>
+<p>We can use third-party middlewares built by awesome developers like you. Here is how we can install third-party middleware.</p>
+<pre><code language="language-sh" class="language-sh">npm install --save body-parser
+
+</code></pre>
+<p>Here is how we can use this third-party express middleware.</p>
+<pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;);
+const bodyParser = require(&#39;body-parser&#39;);
+const app = express();
+const router = express.Router();
+
+
+router.get(&#39;/home&#39;,(req,res)=&gt;{
+ res.send(&#39;
+ Hello World, This is home router
+ &#39;);
+});
+
+
+router.get(&#39;/profile&#39;,(req,res)=&gt;{
+ res.send(&#39;
+ Hello World, This is profile router
+ &#39;);
+});
+
+
+router.get(&#39;/login&#39;,(req,res)=&gt;{
+ res.send(&#39;
+ Hello World, This is login router
+ &#39;);
+});
+
+
+router.get(&#39;/logout&#39;,(req,res)=&gt;{
+ res.send(&#39;
+ Hello World, This is logout router
+ &#39;);
+});
+
+// add middleware before routes
+
+app.use(bodyParser.json());
+
+
+app.use(&#39;/&#39;, router);
+
+
+app.listen(process.env.port||3000);
+
+
+console.log(&#39;Web Server is listening at port &#39;+(process.env.port||3000));
+</code></pre>
+<aside class="special"><p>Make sure that the order of middlewares is right. I have seen lots of developers making this mistake. Express will execute the middleware in the order it is initialized.</p>
+</aside>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Express Sessions Management" duration="0">
+        <p>Session management is a crucial part of the web application. We can use third-party middleware to achieve the session functionality in the Express framework.</p>
+<p>Let&#39;s install the middleware.</p>
+<pre><code language="language-sh" class="language-sh">npm install --save express-session
+</code></pre>
+<p>Here is a sample code to achieve sessions in Express.</p>
+<pre><code language="language-js" class="language-js">const express = require(&#39;express&#39;);
+const session = require(&#39;express-session&#39;);
+const bodyParser = require(&#39;body-parser&#39;);
+const router = express.Router();
+const app = express();
+
+
+app.use(session({secret:&#39;ssshhhhh&#39;,saveUninitialized:true,resave:true}));
+
+app.use(bodyParser.json());   
+
+app.use(bodyParser.urlencoded({extended:true}));
+
+var sess;// global session, NOT recommended, only for demonstration purpose
+
+
+router.get(&#39;/&#39;,(req,res)=&gt;{
+  sess = req.session;
+  if(sess.email){
+    return res.redirect(&#39;/admin&#39;);
+  }
+  res.send(&#39;Ok&#39;);
+});
+
+
+router.post(&#39;/login&#39;,(req,res)=&gt;{
+  sess = req.session;
+  sess.email= req.body.email;
+  res.end(&#39;done&#39;);
+});
+
+
+router.get(&#39;/admin&#39;,(req,res)=&gt;{
+  sess = req.session;
+  if(sess.email){
+    res.write(`&lt;h1&gt;Hello ${sess.email}&lt;!--&lt;/span--&gt;h1&gt;&lt;br&gt;`);
+    // res.end(&#39;[+&#34; logout&#39;&lt;=&#34;&#34; span=&#34;&#34;&gt;+&#39;&gt;Logout&lt;/a&gt;&#39;);
+  
+  res.end();
+  }
+  else{
+    res.write(&#39;Please login first.&#39;);
+   res.end();
+  }
+});
+
+
+router.get(&#39;/logout&#39;,(req,res)=&gt;{
+  req.session.destroy((err)=&gt;{
+    if(err){
+      return console.log(err);
+    }
+    res.redirect(&#39;/&#39;);
+  });
+
+});
+
+
+app.use(&#39;/&#39;, router);
+
+
+app.listen(process.env.PORT||3000,()=&gt;{
+  console.log(`App Started on PORT ${process.env.PORT||3000}`);
+});&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+
+</code></pre>
+<p>There is another alternative to sessions that is widely used in mobile applications. It&#39;s a token-based authentication. We have covered the token-based authentication in the detail in <a href="https://codeforgeek.com/refresh-token-jwt-nodejs-authentication/" target="_blank">this article</a>.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="File uploads in Express" duration="0">
+        <p>To handle file uploads in the Express framework, we need to use the popular node module called <strong>multer</strong>.</p>
+<p>First, install <strong>multer</strong> using the following command.</p>
+<pre><code>npm install --save express body-parser multer
+</code></pre>
+<p>Refer to the code below to handle file uploads in the Express framework.</p>
+<pre><code language="language-js" class="language-js">var express = require(&#34;express&#34;);
+var bodyParser = require(&#34;body-parser&#34;);
+var multer = require(&#39;multer&#39;);
+var app = express();
+
+
+app.use(bodyParser.json());
+
+var storage = multer.diskStorage({
+ destination:function(req, file, callback){
+  callback(null,&#39;./uploads&#39;);
+ },
+ filename:function(req, file, callback){
+  callback(null, file.fieldname+&#39;-&#39;+Date.now());
+ }
+});
+
+var upload = multer({ storage : storage }).array(&#39;userPhoto&#39;,2);
+
+
+app.post(&#39;/api/photo&#39;,function(req,res){
+  upload(req,res,function(err){
+    if(err){
+      return res.end(&#34;Error uploading file.&#34;);
+    }
+    res.end(&#34;File is uploaded&#34;);
+  });
+});
+
+
+app.listen(3000,function(){
+  console.log(&#34;Working on port 3000&#34;);
+});
+
+First, we initialized the multer with the disk storage i.e we are going to save our files in the machine where our Node server is running.
+
+
+
+var storage = multer.diskStorage({
+ destination:function(req, file, callback){
+  callback(null,&#39;./uploads&#39;);
+ },
+ filename:function(req, file, callback){
+  callback(null, file.fieldname+&#39;-&#39;+Date.now());
+ }
+});
+
+var upload = multer({ storage : storage }).array(&#39;userPhoto&#39;,2);
+
+The **userPhoto** is the key that should be used in the HTML file element as an ID. Then, we simply called this function in the router.
+
+
+  upload(req,res,function(err){
+    if(err){
+      return res.end(&#34;Error uploading file.&#34;);
+    }
+    res.end(&#34;File is uploaded&#34;);
+  });
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Summary" duration="0">
+        <p>Node.js is a popular framework and used in tons of companies. In fact, we built this website using Node and Express. I highly recommend you to learn it in and out to upskill and expand your portfolio. I hope this Node.js tutorial is helpful to you. Please provide your feedback in the comment section.</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

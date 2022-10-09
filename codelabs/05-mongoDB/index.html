@@ -1,0 +1,359 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>05-MongoDB</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="05-mongoDB"
+                  title="05-MongoDB"
+                  environment="web"
+                  feedback-link="mailto:hakam.abdelqader@ibm.com">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p>MongoDB is an open-source, cross-platform, and distributed document-based database designed for ease of application development and scaling.</p>
+<p>It is developed by MongoDB Inc. with a NoSQL architecture in mind by which the storage and retrieval of data in the MongoDB are not in the form of tables.</p>
+<h2 is-upgraded>Key Features</h2>
+<ul>
+<li>Support large numbers of concurrent users (tens of thousands, perhaps millions)</li>
+<li>Deliver highly responsive experiences to a globally distributed base of users</li>
+<li>Be always available – no downtime</li>
+<li>Handle semi- and unstructured data</li>
+<li>Rapidly adapt to changing requirements with frequent updates and new features</li>
+<li>Easy to scale up or down as per the requirement since it is a document-based database</li>
+<li>Provides tools to manage MongoDB databases</li>
+</ul>
+<h2 is-upgraded>Difference between SQL and NoSQL</h2>
+<p class="image-container"><img src="img/7cdd5661f0fe898a.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Translate SQL schema and NoSQL" duration="0">
+        <p class="image-container"><img src="img/641374a43d23bb09.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create Database and collection" duration="0">
+        <pre><code language="language-sh" class="language-sh"># Creating a Users database
+&gt; use Users
+
+# To validate that database creation
+&gt; show databases
+
+# creating a new collection inside the Users database
+&gt; db.createCollection(&#39;user_info&#39;)
+
+# To validate that collections creation
+&gt; show collections
+
+# Delete a collection inside the Users database
+&gt; db.user_info.drop()
+
+# To validate that collections deletion
+&gt; show collections
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create documents" duration="0">
+        <pre><code language="language-sh" class="language-sh"># Adding a document in a collection
+&gt; db.user_info.insertOne({
+	_id: 1,
+	givename: &#34;Hakam&#34;,
+	surname: &#34;Adelqader&#34;,
+	email: &#34;hakam.abdelqader@ibm.com&#34;,
+	office_location: &#34;Dubai&#34;,
+	network_id: 12345,
+	address: &#34;Building 1, Work address&#34;
+})
+
+# Adding a user with two address info instead of only one
+&gt; db.user_info.insertOne({
+	_id: 1,
+	givename: &#34;Hakam&#34;,
+	surname: &#34;Adelqader&#34;,
+	email: &#34;hakam.abdelqader@ibm.com&#34;,
+	office_location: &#34;Dubai&#34;,
+	network_id: 12345,
+	address: { work: &#34;Building 1, Work address&#34;, home: &#34;Building 1, Home address&#34;}
+})
+</code></pre>
+<h2 is-upgraded>Insert Many documents at once</h2>
+<pre><code language="language-sh" class="language-sh"># Adding a new users in one call
+&gt; db.user_info.insertMany([
+	{
+    	_id: 1,
+    	givename: &#34;Hakam&#34;,
+        surname: &#34;Adelqader&#34;,
+        email: &#34;hakam.abdelqader@ibm.com&#34;,
+        office_location: &#34;Dubai&#34;,
+        network_id: 12345,
+        address: &#34;Building 1, Work address&#34;
+	},
+  {
+    	_id: 2,
+        givename: &#34;Ahmed&#34;,
+        surname: &#34;Yahya&#34;,
+        email: &#34;ahmed.yahya@ibm.com&#34;,
+        office_location: &#34;Cairo&#34;,
+        network_id: 54321,
+        address: &#34;Building 2, Work address&#34;
+	}]
+  )
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Read collection" duration="0">
+        <pre><code language="language-sh" class="language-sh"># Listing all the documents in collection
+&gt; db.user_info.find({})
+
+# Listing a specific document with an _id
+&gt; db.user_info.find({_id: 1})
+
+# Listing all the documents with matching field and value
+&gt; db.user_info.find({email: &#39;hakam.abdelqader@ibm.com&#39;})
+
+# To limit a results length
+&gt; db.user_info.find({}).limit(1)
+
+# To display a documnet in a proper JSON format
+&gt; db.user_info.find({}).limit(1).pretty()
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Update collection" duration="0">
+        <pre><code language="language-sh" class="language-sh"># To update a field value inside document
+&gt; db.user_info.updateOne(
+	{
+    	_id: 1
+    },
+    {
+    	$set: {
+        	office_location: &#39;Khobar&#39;
+            }
+    })
+    
+# To update all record containing a matching field and value
+&gt; db.user_info.updateMany(
+	{ 
+    	givename: &#34;Hakam&#34;
+    },
+    {
+    	$set: { 
+        	office_location: &#39;Khobar&#39;
+            }
+    })
+</code></pre>
+<h2 is-upgraded>Replace the document</h2>
+<pre><code language="language-sh" class="language-sh"># To replace all fields in a document and assign new ones
+&gt; db.user_info.replaceOne(
+	{
+    	_id: 1
+    },
+    {
+        givename: &#34;Hakam&#34;,
+        surname: &#34;Adelqader&#34;,
+        email: &#34;hakam.abdelqader@ibm.com&#34;,
+        home_location: &#34;Dubai&#34;,
+        office_location: &#34;Dubai&#34;,
+        network_id: 12345,
+        address: &#34;Building 1, Work address&#34;
+     })
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Delete collection" duration="0">
+        <pre><code language="language-sh" class="language-sh"># To delete a documnet using the _id
+&gt; db.user_info.deleteOne(
+	{
+    	_id: 1
+    }
+)
+
+# To delete all documnets with matching field and value
+&gt; db.user_info.deleteMany(
+	{
+    	givename: &#34;Hakam&#34;
+    }
+)
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="RDBMS Where Clause Equivalents in MongoDB" duration="0">
+        <p>To query the document on the basis of some condition, you can use following operations.</p>
+<p class="image-container"><img src="img/2daedca9ab4c02d0.png"></p>
+<h2 is-upgraded>By example</h2>
+<p>Create a new database with the followning data</p>
+<pre><code language="language-sh" class="language-sh">&gt;use employee
+
+db.createCollection(&#34;empDetails&#34;)
+</code></pre>
+<p>InsertMany for the examples</p>
+<pre><code language="language-sh" class="language-sh">db.empDetails.insertMany(
+	[
+		{
+			First_Name: &#34;Radhika&#34;,
+			Last_Name: &#34;Sharma&#34;,
+			Age: &#34;26&#34;,
+			e_mail: &#34;radhika_sharma.123@gmail.com&#34;,
+			phone: &#34;9000012345&#34;
+		},
+		{
+			First_Name: &#34;Rachel&#34;,
+			Last_Name: &#34;Christopher&#34;,
+			Age: &#34;27&#34;,
+			e_mail: &#34;Rachel_Christopher.123@gmail.com&#34;,
+			phone: &#34;9000054321&#34;
+		},
+		{
+			First_Name: &#34;Fathima&#34;,
+			Last_Name: &#34;Sheik&#34;,
+			Age: &#34;24&#34;,
+			e_mail: &#34;Fathima_Sheik.123@gmail.com&#34;,
+			phone: &#34;9000054321&#34;
+		}
+	]
+)
+
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AND and OR statements" duration="0">
+        <h2 is-upgraded>AND in MongoDB</h2>
+<p><strong>Syntax</strong> To query documents based on the AND condition, you need to use $and keyword. Following is the basic syntax of AND −</p>
+<pre><code language="language-sh" class="language-sh">db.mycol.find({ $and: [ {&lt;key1&gt;:&lt;value1&gt;}, { &lt;key2&gt;:&lt;value2&gt;} ] })
+
+</code></pre>
+<p>For the above given example, equivalent where clause will be ‘ where by = ‘tutorials point&#39; AND title = ‘MongoDB Overview&#39; ‘. You can pass any number of key, value pairs in find clause.</p>
+<h2 is-upgraded>OR in MongoDB</h2>
+<p><strong>Syntax</strong> To query documents based on the OR condition, you need to use $or keyword. Following is the basic syntax of OR −</p>
+<pre><code language="language-sh" class="language-sh">db.COLLECTION_NAME.find(
+   {
+      $or: [
+         {key1: value1}, {key2:value2}
+      ]
+   }
+).pretty()
+
+</code></pre>
+<h2 is-upgraded>Using AND and OR Together</h2>
+<p><strong>Example</strong></p>
+<p>The following example will show the documents that have likes greater than 10 and whose title is either ‘MongoDB Overview&#39; or by is ‘tutorials point&#39;. Equivalent SQL where clause is ‘where likes&gt;10 AND (by = ‘tutorials point&#39; OR title = ‘MongoDB Overview&#39;)&#39;</p>
+<pre><code language="language-sh" class="language-sh">db.empDetails.find({&#34;Age&#34;: {$gt:26}, $or: [{&#34;First_Name&#34;: &#34;Fathima&#34;},
+   {&#34;First_Name&#34;: &#34;Rachel&#34;}]}).pretty()
+{
+			First_Name: &#34;Rachel&#34;,
+			Last_Name: &#34;Christopher&#34;,
+			Age: &#34;27&#34;,
+			e_mail: &#34;Rachel_Christopher.123@gmail.com&#34;,
+			phone: &#34;9000054321&#34;
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="NOR in MongoDB" duration="0">
+        <p><strong>Syntax</strong></p>
+<p>To query documents based on the NOT condition, you need to use $not keyword. Following is the basic syntax of NOT −</p>
+<pre><code language="language-sh" class="language-sh">&gt;db.COLLECTION_NAME.find(
+	{
+		$nor: [
+			{key1: value1}, {key2:value2}
+		]
+	}
+)
+
+</code></pre>
+<h2 is-upgraded>Example</h2>
+<p>Following example will retrieve the document(s) whose first name is not &#34;Radhika&#34; and last name is not &#34;Christopher&#34;</p>
+<pre><code language="language-sh" class="language-sh">&gt; db.empDetails.find(
+	{
+		$nor:[
+			40
+			{&#34;First_Name&#34;: &#34;Radhika&#34;},
+			{&#34;Last_Name&#34;: &#34;Christopher&#34;}
+		]
+	}
+).pretty()
+{
+	&#34;_id&#34; : ObjectId(&#34;5dd631f270fb13eec3963bef&#34;),
+	&#34;First_Name&#34; : &#34;Fathima&#34;,
+	&#34;Last_Name&#34; : &#34;Sheik&#34;,
+	&#34;Age&#34; : &#34;24&#34;,
+	&#34;e_mail&#34; : &#34;Fathima_Sheik.123@gmail.com&#34;,
+	&#34;phone&#34; : &#34;9000054321&#34;
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="NOT in MongoDB" duration="0">
+        <p><strong>Syntax</strong></p>
+<p>To query documents based on the NOT condition, you need to use $not keyword following is the basic syntax of NOT</p>
+<pre><code language="language-sh" class="language-sh">&gt;db.COLLECTION_NAME.find(
+	{
+		$NOT: [
+			{key1: value1}, {key2:value2}
+		]
+	}
+).pretty()
+</code></pre>
+<p><strong>Example</strong></p>
+<p>Following example will retrieve the document(s) whose age is not greater than 25</p>
+<pre><code language="language-sh" class="language-sh"> db.empDetails.find( { &#34;Age&#34;: { $not: { $gt: &#34;25&#34; } } } )
+{
+	&#34;_id&#34; : ObjectId(&#34;5dd6636870fb13eec3963bf7&#34;),
+	&#34;First_Name&#34; : &#34;Fathima&#34;,
+	&#34;Last_Name&#34; : &#34;Sheik&#34;,
+	&#34;Age&#34; : &#34;24&#34;,
+	&#34;e_mail&#34; : &#34;Fathima_Sheik.123@gmail.com&#34;,
+	&#34;phone&#34; : &#34;9000054321&#34;
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

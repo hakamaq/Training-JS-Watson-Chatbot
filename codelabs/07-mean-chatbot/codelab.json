@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-10-09T07:04:56+03:00",
+  "id": "07-mean-chatbot",
+  "duration": 1,
+  "title": "07-MongoDB + Express  + Angular + NodeJs Chatbot",
+  "authors": "Hakam Abdelqader",
+  "summary": "Summary of lab",
+  "source": "README.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "mean",
+    "angular",
+    "nodejs",
+    "express",
+    "mongodb"
+  ],
+  "tags": [],
+  "feedback": "mailto:hakam.abdelqader@ibm.com",
+  "url": "07-mean-chatbot"
+}

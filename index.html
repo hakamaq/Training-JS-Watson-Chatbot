@@ -1,0 +1,185 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="These codelabs material This site provides tutorials that give a guided, hands-on experience during our training. Each codelab is split into the day and the topic covered. By the end of the course you will learn through each step how to create a chatbot in nodeJs, express, angular and save logs in mongodb.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="IBM Aramco Developer Training">
+<meta name="application-name" content="IBM Aramco Developer Training">
+<link rel="canonical" href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/">
+<title>IBM Aramco Developer Training</title>
+<link rel="stylesheet" href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/styles/main.css">
+<link rel="import" href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/elements/elements.html">
+<style is="custom-style">
+:root {
+      --paper-input-container-underline: {
+        display: none;
+      };
+      --paper-input-container-underline-focus: {
+        display: none;
+      };
+      --paper-tabs-selection-bar-color: currentcolor;
+    }
+
+    .dropdown-filter {
+      --paper-input-container: {
+        padding: 8px;
+      }
+    }
+</style>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#455a64">
+<meta name="apple-mobile-web-app-title" content="IBM Aramco Developer Training">
+<link rel="apple-touch-icon" sizes="180x180" href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="194x194" href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/images/favicons/favicon-194x194.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/images/favicons/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/images/favicons/favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="mask-icon" href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/images/favicons/safari-pinned-tab.svg" color="#455a64">
+<meta name="msapplication-TileColor" content="#455a64">
+<meta name="msapplication-TileImage" content="https://hakamaq.github.io/Training-JS-Watson-Chatbot/images/favicons/mstile-144x144.png">
+<meta name="theme-color" content="#455a64">
+<meta name="og:type" property="og:type" content="website">
+<meta name="og:title" property="og:title" content="IBM Aramco Developer Training">
+<meta name="og:description" property="og:description" content="These codelabs material This site provides tutorials that give a guided, hands-on experience during our training. Each codelab is split into the day and the topic covered. By the end of the course you will learn through each step how to create a chatbot in nodeJs, express, angular and save logs in mongodb.">
+<meta name="og:url" property="og:url" content="https://hakamaq.github.io/Training-JS-Watson-Chatbot/">
+<meta name="og:site_name" property="og:site_name" content="IBM Aramco Developer Training">
+<meta name="og:determiner" property="og:determiner" content="the">
+<meta name="og:locale" property="og:locale" content="en_US">
+<meta name="og:image" property="og:image" content="https://hakamaq.github.io/Training-JS-Watson-Chatbot/images/og-image.png">
+<meta name="og:image:url" property="og:image:url" content="https://hakamaq.github.io/Training-JS-Watson-Chatbot/images/og-image.png">
+<meta name="og:image:type" property="og:image:type" content="image/png">
+<meta name="og:image:width" property="og:image:width" content="1200">
+<meta name="og:image:height" property="og:image:height" content="1200">
+<meta name="og:image:alt" property="og:image:alt" content="IBM Aramco Developer Training">
+<meta name="twitter:card" property="twitter:card" content="summary_large_image">
+<meta name="twitter:title" property="twitter:title" content="IBM Aramco Developer Training">
+<meta name="twitter:description" property="twitter:description" content="These codelabs material This site provides tutorials that give a guided, hands-on experience during our training. Each codelab is split into the day and the topic covered. By the end of the course you will learn through each step how to create a chatbot in nodeJs, express, angular and save logs in mongodb.">
+<meta name="twitter:image" property="twitter:image" content="https://hakamaq.github.io/Training-JS-Watson-Chatbot/images/og-image.png">
+<meta name="twitter:url" property="twitter:url" content="https://hakamaq.github.io/Training-JS-Watson-Chatbot/">
+</head>
+<body id="app" is="body-bind" class="loading fullbleed">
+<paper-header-panel id="main" mode="standard" main>
+<div id="mainToolbar" class="paper-header">
+<div class="site-width layout horizontal">
+<a class="bx--header__name Header__top-product-title" href="/">
+<span class="bx--header__name--prefix">IBM </span>&nbsp; Watson &nbsp;<span style="font-weight: 300;">Developer</span></a>
+<div id="searchbar">
+<paper-input-container no-label-float>
+<paper-icon-button prefix icon="search"></paper-icon-button>
+<label>Search</label>
+<input is="iron-input" bind-value="{{searchVal}}" on-keydown="onSearchKeyDown">
+</paper-input-container>
+</div>
+</div>
+</div>
+<header id="banner" down$="[[_toBoolean(selectedFilter)]]">
+<div class="site-width">
+<h2 class="banner-title">Aramco NodeJs Training</h2>
+<div class="banner-description" data-filter-selected$="[[_toBoolean(selectedFilter)]]">
+<p class="banner-info">
+These codelabs material This site provides tutorials that give a guided, hands-on experience during our training. Each codelab is split into the day and the topic covered. By the end of the course you will learn through each step how to create a chatbot in nodeJs, express, angular and save logs in mongodb.
+<br>
+<a href="https://github.com/hakamaq/Training-JS-Watson-Chatbot">GitHub Page</a>
+</p>
+</div>
+</div>
+</header>
+<main>
+<div id="filters" class="site-width layout horizontal center justified">
+<div id="sortby">
+<paper-tabs selected="0" noink on-iron-activate="sortBy">
+<paper-tab>A-Z</paper-tab>
+<paper-tab>Recent</paper-tab>
+<paper-tab>Duration</paper-tab>
+</paper-tabs>
+</div>
+<paper-dropdown-menu label="Filter by category" class="dropdown-filter" no-label-float noink no-animations>
+<paper-listbox id="categorylist" slot="dropdown-content" class="dropdown-content" on-iron-activate="onCategoryActivate" attr-for-selected="filter">
+<paper-item filter="angular">Angular</paper-item>
+<paper-item filter="express">Express</paper-item>
+<paper-item filter="javascript">Javascript</paper-item>
+<paper-item filter="mean">Mean</paper-item>
+<paper-item filter="mongodb">Mongodb</paper-item>
+<paper-item filter="nodejs">Nodejs</paper-item>
+<paper-item filter="websockets">Websockets</paper-item>
+</paper-listbox>
+</paper-dropdown-menu></div>
+<card-sorter id="cards" class="site-width">
+<a href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/codelabs/06-angular/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-angular" data-category="angular,react" data-title="06-Angular vs React" data-duration="10" data-updated="2022-10-09T06:52:48+03:00" data-tags="" data-pin="">
+<div class="description">06-Angular vs React</div>
+<div class="card-duration">
+<span>10 min </span>
+<span>Updated Oct 9, 2022</span>
+</div>
+<div class="card-footer">
+<div class="category-icon angular-icon"></div>
+<paper-button class="angular-bg">Start</paper-button>
+</div>
+</a>
+<a href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/codelabs/03-express/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-express" data-category="express" data-title="03-Express Framework" data-duration="0" data-updated="2022-10-09T06:44:06+03:00" data-tags="polymer-summit,web" data-pin="">
+<div class="description">03-Express Framework</div>
+<div class="card-duration">
+<span></span>
+<span>Updated Oct 9, 2022</span>
+</div>
+<div class="card-footer">
+<div class="category-icon express-icon"></div>
+<paper-button class="express-bg">Start</paper-button>
+</div>
+</a>
+<a href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/codelabs/07-mean-chatbot/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-mean" data-category="mean,angular,nodejs,express,mongodb" data-title="07-MongoDB + Express  + Angular + NodeJs Chatbot" data-duration="1" data-updated="2022-10-09T07:04:56+03:00" data-tags="" data-pin="">
+<div class="description">07-MongoDB + Express + Angular + NodeJs Chatbot</div>
+<div class="card-duration">
+<span>1 min </span>
+<span>Updated Oct 9, 2022</span>
+</div>
+<div class="card-footer">
+<div class="category-icon mean-icon"></div>
+<paper-button class="mean-bg">Start</paper-button>
+</div>
+</a>
+<a href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/codelabs/05-mongoDB/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-mongodb" data-category="mongodb" data-title="05-MongoDB" data-duration="0" data-updated="2022-10-09T06:44:38+03:00" data-tags="" data-pin="">
+<div class="description">05-MongoDB</div>
+<div class="card-duration">
+<span></span>
+<span>Updated Oct 9, 2022</span>
+</div>
+<div class="card-footer">
+<div class="category-icon mongodb-icon"></div>
+<paper-button class="mongodb-bg">Start</paper-button>
+</div>
+</a>
+<a href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/codelabs/02-node-js/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-nodejs" data-category="nodejs,javascript" data-title="02-NodeJS" data-duration="3" data-updated="2022-10-09T06:43:48+03:00" data-tags="polymer-summit,web" data-pin="">
+<div class="description">02-NodeJS</div>
+<div class="card-duration">
+<span>3 min </span>
+<span>Updated Oct 9, 2022</span>
+</div>
+<div class="card-footer">
+<div class="category-icon nodejs-icon"></div>
+<paper-button class="nodejs-bg">Start</paper-button>
+</div>
+</a>
+<a href="https://hakamaq.github.io/Training-JS-Watson-Chatbot/codelabs/04-socket-io/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-websockets" data-category="websockets" data-title="04-WebSockets and Socket.io" data-duration="2" data-updated="2022-10-09T06:44:21+03:00" data-tags="" data-pin="">
+<div class="description">04-WebSockets and Socket.io</div>
+<div class="card-duration">
+<span>2 min </span>
+<span>Updated Oct 9, 2022</span>
+</div>
+<div class="card-footer">
+<div class="category-icon websockets-icon"></div>
+<paper-button class="websockets-bg">Start</paper-button>
+</div>
+</a>
+</card-sorter>
+<div id="loading-placeholder" class="site-width">
+Loading Codelabs, please wait...
+</div>
+</main>
+</paper-header-panel>
+<script src="./scripts/main.js"></script>
+</body>
+</html>
