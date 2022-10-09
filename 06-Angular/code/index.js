@@ -55,41 +55,8 @@ const assistant = new AssistantV2({
   }),
   serviceUrl: process.env.WATSON_URL, // Replace '{url}' 
 });
-
-// STEP 12 Scroll to end of index.js
-// Create routes for Session
-// server.js is /sessionId
-app.get('/createSession', (req, res) => {
-  // STEP 14 call assistant to create session
-  assistant.createSession({assistantId: process.env.ASSISTANT_ID})
-           .then(session => res.json(session.result.session_id)) // UPDATE
-           .catch(err => res.json(err))
-})
-
-//STEP 13 route to ask assitant 
-app.post("/ask", async (req, res) =>{ // STEP 15 ADD async (req, res)
-  // STEP 16 create message request object 
-  // ======= AFTER BREAK MODIFICATIONS ==== 
-  
-  // STEP 17 ADD THIS LINE in /ask function
-  /*17*/ const { session_id, text } = req.body 
-  console.log("/ask POST body:", req.body)
-  console.log("/ask POST session_id:", session_id)
-  console.log("/ask POST text:", text)
-  
-  const message = {
-    assistantId: process.env.ASSISTANT_ID,
-    /* 17: remove req.body. */sessionId: session_id, 
-    input: {
-      message_type: 'text',
-      /* 17: remove req.body. */ text: text
-      }
-    }
-  
-    assistant.message(message)
-             .then(response => res.json(response.result))
-             .catch(err => res.json(err))
-})
+const watsonRouter = require("./api/routes/watsonRoutes");
+app.use("/", watsonRouter);
 
 // STEP 18 Install nodemon
 // npm i nodemon

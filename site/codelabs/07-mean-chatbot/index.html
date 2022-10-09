@@ -39,6 +39,13 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="Agenda" duration="1">
+        <h2 is-upgraded>Weeks agenda</h2>
+<p class="image-container"><img src="img/9edb221264404d56.png"></p>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="Setup project" duration="0">
         <p>To begin creating the application, type the following lines into your terminal.</p>
 <p>This will setup the project folder and install the dependencies need for this project.</p>
@@ -310,8 +317,9 @@ $ ng build
 
       </google-codelab-step>
     
-      <google-codelab-step label="app.component.ts" duration="0">
-        <p>Components are the core building blocks for Angular apps. Components are like lego pieces they are small segments of code that make up entire application or if we are building legos the whole lego model</p>
+      <google-codelab-step label="Base Component &#43; Generate Component" duration="0">
+        <p>At the client-side, we&#39;ll use MVC pattern-based framework Angular. We&#39;ll have only a single page for getting input from the user, For that we only create one service file for connecting to IBM watson services apis we created in the server.</p>
+<p>Components are the core building blocks for Angular apps. Components are like lego pieces they are small segments of code that make up entire application or if we are building legos the whole lego model</p>
 <p>Components have 3 main aspects:</p>
 <ul>
 <li>An HTML file for the template.</li>
@@ -369,12 +377,18 @@ export class AppComponent implements OnInit {
       </google-codelab-step>
     
       <google-codelab-step label="Generate Component" duration="0">
-        <p>You can create files for a component manually or using the Angular CLI command. Angular CLI reduces the development time. So, let&#39;s use Angular CLI to create a new component.</p>
-<p>Use the following CLI command to generate a component.</p>
+        <p>The project has two component, and we will be addiing a third which is the login system that will integrate mongodb connection on the server-side.</p>
+<p>You can create files for a component manually or using the Angular CLI command. Angular CLI reduces the development time. So, let&#39;s use Angular CLI to create a new component.</p>
+<p>Use the following CLI command to generate our second component.</p>
 <pre><code language="language-sh" class="language-sh">ng generate component messages
 </code></pre>
 <p class="image-container"><img src="img/aafb8132bbc83da6.png"></p>
 
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="app.component.html" duration="0">
+        
 
       </google-codelab-step>
     
