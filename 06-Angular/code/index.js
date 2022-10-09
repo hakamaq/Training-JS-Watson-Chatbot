@@ -1,5 +1,3 @@
-// STEP 1 Create a new file in code/ outside /code/chat-ui 
-//File name index.js
 
 //STEP 9 Run command and get dotEnv
 // npm i dotenv
