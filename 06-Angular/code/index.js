@@ -50,7 +50,7 @@ app.get("/", (req, res) =>
 const watsonRouter = require("./api/routes/watsonRoutes");
 app.use("/", watsonRouter);
 
-const mongoRouter = require("./api/routes")
+const mongoRouter = require("./api/routes/mongoDBRoute")
 app.use("/mongo", mongoRouter)
 
 // STEP 18 Install nodemon
