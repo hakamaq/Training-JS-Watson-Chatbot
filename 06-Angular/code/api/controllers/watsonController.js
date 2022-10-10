@@ -9,31 +9,38 @@ const assistant = new AssistantV2({
   serviceUrl: process.env.WATSON_URL, // Replace '{url}' 
 });
 
-const retrieveSession =  (req, res) => {
-  // STEP 14 call assistant to create session
+const init = (req, res) => res.send("Ready to use Watson!");
+
+const retrieveSession = (req, res) => {
   assistant.createSession({assistantId: process.env.ASSISTANT_ID})
-           .then(session => res.json(session.result.session_id)) // UPDATE
-           .catch(err => res.json(err))
+  .then(response => {
+       if(res.status > 300){
+         throw response
+       }
+       res.status(response.status).json(response.result)
+  }) // UPDATE
+  .catch(err => res.status(err.status? err.status: 404).json(err))
 }
 
-const ask = async (req, res) =>{
-  const { session_id, text } = req.body 
-   
+const message = (req, res) => {
+   /*17*/ const { session_id, text } = req.body 
+  
    const message = {
-     assistantId: process.env.ASSISTANT_ID,
-     sessionId: session_id, 
-     input: {
-       message_type: 'text',
-        text: text
-       }
-     }
-   
-     assistant.message(message)
-              .then(response => res.json(response.result))
-              .catch(err => res.json(err))
- }
- // STEP 4 
- module.exports = {
+    assistantId: process.env.ASSISTANT_ID,
+    /* 17: remove req.body. */sessionId: session_id, 
+    input: {
+      message_type: 'text',
+      /* 17: remove req.body. */ text: text
+      }
+    }
+  
+    assistant.message(message)
+             .then(response => res.json(response))
+             .catch(err => res.json(err))
+}
+
+module.exports ={
+  init,
   retrieveSession,
-  ask
- }
+  message
+}

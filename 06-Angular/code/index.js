@@ -42,21 +42,16 @@ app.get("/", (req, res) =>
 
 //STEP 7 Run Command 
 //npm install ibm-watson
-const AssistantV2 = require("ibm-watson/assistant/v2")
-const { IamAuthenticator } = require("ibm-watson/auth")
 
 // STEP 8 Configure Watson
 // Go to Watson Docs URL in WhatsApp 
 // Copy assitant Authentication Initialization
-const assistant = new AssistantV2({
-  version: process.env.VERSION, // Replace '{version}' 
-  authenticator: new IamAuthenticator({
-    apikey: process.env.APIKEY, // Replace '{apikey}' 
-  }),
-  serviceUrl: process.env.WATSON_URL, // Replace '{url}' 
-});
+
 const watsonRouter = require("./api/routes/watsonRoutes");
 app.use("/", watsonRouter);
+
+const mongoRouter = require("./api/routes")
+app.use("/mongo", mongoRouter)
 
 // STEP 18 Install nodemon
 // npm i nodemon
