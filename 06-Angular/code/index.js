@@ -1,5 +1,3 @@
-// STEP 1 Create a new file in code/ outside /code/chat-ui 
-//File name index.js
 
 //STEP 9 Run command and get dotEnv
 // npm i dotenv
@@ -37,19 +35,23 @@ app.listen(port, () =>
   console.log(`Server running on port ${port}`)
 )
 
+// STEP 6 get route default
+app.get("/", (req, res) => 
+  res.send("Ready to use Watson!")
+)
+
 //STEP 7 Run Command 
 //npm install ibm-watson
-
 
 // STEP 8 Configure Watson
 // Go to Watson Docs URL in WhatsApp 
 // Copy assitant Authentication Initialization
 
+const watsonRouter = require("./api/routes/watsonRoutes");
+app.use("/", watsonRouter);
 
-// STEP 12 Scroll to end of index.js
-// Create routes for Session
-// server.js is /sessionId
-
+const mongoRouter = require("./api/routes")
+app.use("/mongo", mongoRouter)
 
 // STEP 18 Install nodemon
 // npm i nodemon
@@ -72,6 +74,3 @@ app.listen(port, () =>
 // "dev": "nodemon index.js & cd ./chat-ui && npm start"
 
 // STEP 24 ./chat-ui/chat.service.ts
-
-const watsonRoutes = require("./api/routes/watsonRoutes")
-app.use("/", watsonRoutes)
