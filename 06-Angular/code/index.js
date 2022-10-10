@@ -50,27 +50,11 @@ app.get("/", (req, res) =>
 const watsonRouter = require("./api/routes/watsonRoutes");
 app.use("/", watsonRouter);
 
-const mongoRouter = require("./api/routes/mongoDBRoute")
-app.use("/mongo", mongoRouter)
+// index.js
+// STEP 5 Rename mongoRouter to logsRouter
+const logsRouter = require("./api/routes/logsRoute")
+app.use("/mongo/logs", logsRouter) // add the .../logs
 
-// STEP 18 Install nodemon
-// npm i nodemon
-
-//STEP 19 run command
-// npm init -y
-
-//STEP 20 open package.json
-// EDIT line
-// "start": "node index.js" to
-// "dev": "nodemon index.js && cd ./chat-ui && npm start"
-
-//STEP 21 Run command to open server and client same time
-// npm run dev
-
-// STEP 22 Run command
-// npm i concurrently
-
-// STEP 23 edit "scripts"."dev" in package.json
-// "dev": "nodemon index.js & cd ./chat-ui && npm start"
-
-// STEP 24 ./chat-ui/chat.service.ts
+//STEP 6 Create a user router
+const userRouter = require("./api/routes/userRoute")
+app.use("/mongo/user", userRouter) 
