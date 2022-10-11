@@ -1,0 +1,517 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>React</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="09-react"
+                  title="React"
+                  environment="web"
+                  feedback-link="mailto:hakam.abdelqader@ibm.com">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <ul>
+<li>Learn about React basics:</li>
+<li>Rendering</li>
+<li>Stateless components</li>
+<li>Stateful components</li>
+<li>Styling components</li>
+<li>The folder architecture</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Before you get started" duration="0">
+        <h2 is-upgraded>Getting started</h2>
+<p>To be able to get started easily, look into the <a href="https://github.com/facebookincubator/create-react-app" target="_blank">Create React App</a>. It is a zero configuration command-line tool to rapidly bootstrap React projects. By using this you won&#39;t need to go through webpack configuration and you will be able to code right away.</p>
+<h2 is-upgraded>Installation</h2>
+<p>Run the following commands to get started:</p>
+<pre><code language="language-sh" class="language-sh">npx create-react-app code
+</code></pre>
+<pre><code language="language-sh" class="language-sh">cd code
+</code></pre>
+<pre><code language="language-sh" class="language-sh">npm start
+</code></pre>
+<p>This will runs the app in the development mode, and live-reload as you make changes.</p>
+<p>Open <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> to view it in the browser.</p>
+<h2 is-upgraded>Folder Structure</h2>
+<p>After creation, your project should something look like this:</p>
+<pre><code>code
+
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── public
+│ └── favicon.ico
+│ └── index.html
+│ └── manifest.json
+└── src
+    └── App.css
+    └── App.js
+    └── App.test.js
+    └── index.css
+    └── index.js
+    └── logo.svg
+    └── registerServiceWorker.js
+</code></pre>
+<p>Real world applications can have any number of components, ranging from a handful to thousands. Having all of them in a single file is impractical, so we encourage you to structure them into modules / folders.</p>
+<p>This allows you to keep your applications well structured and easy to work with. You can create a <code>components</code> folder under <code>/src</code> and create a folder for each component, where you will be able to colocate the CSS styles and any other resources the component may require.</p>
+<p>For the project to build, <strong>these files must exist with exact filenames</strong>:</p>
+<ul>
+<li><code>public/index.html</code> is the page template;</li>
+<li><code>src/index.js</code> is the JavaScript entry point.</li>
+</ul>
+<p>You can delete or rename the other files.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Go further" duration="0">
+        <h3 is-upgraded>List of Available Scripts</h3>
+<p>In the project directory, you can run:</p>
+<p><code>npm start</code>[](https://shopify-1.gitbook.io/react/getting-started/before-you-get-started#npm-start)</p>
+<p>Runs the app in the development mode. Open <a href="http://localhost:3000" target="_blank">http://localhost:3000</a> to view it in the browser.</p>
+<p>The page will reload if you make edits. You will also see any lint errors in the console.</p>
+<p><code>npm test</code></p>
+<p><code>npm run build</code></p>
+<p>Builds the app for production to the <code>build</code> folder. It correctly bundles React in production mode and optimizes the build for the best performance.</p>
+<p>The build is minified and the filenames include the hashes. Your app is ready to be deployed!</p>
+<p><code>npm run eject</code></p>
+<p><strong>Note: this is a one-way operation. Once you </strong><code>eject</code><strong>, you can&#39;t go back!</strong></p>
+<p>If you aren&#39;t satisfied with the build tool and configuration choices, you can <code>eject</code> at any time. This command will remove the single build dependency from your project.</p>
+<p>Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except <code>eject</code> will still work, but they will point to the copied scripts so you can tweak them. At this point you&#39;re on your own.</p>
+<p>You don&#39;t have to ever use <code>eject</code>. The curated feature set is suitable for small and middle deployments, and you shouldn&#39;t feel obligated to use this feature. However we understand that this tool wouldn&#39;t be useful if you couldn&#39;t customize it when you are ready for it.</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Methods" duration="0">
+        <h2 is-upgraded>Importing React</h2>
+<p>In order to use React, we must first import the React library. When we import the library, it creates an object that contains properties needed to make React work, including JSX and creating custom components.</p>
+<pre><code language="language-js" class="language-js">import React from &#39;react&#39;;
+</code></pre>
+<h2 is-upgraded>React Components</h2>
+<p>A React component is a reusable piece of code used to define the appearance, behavior, and state of a portion of a web app&#39;s interface. Components are defined as functions or as classes. Using the component as a factory, an infinite number of component instances can be created.</p>
+<pre><code language="language-js" class="language-js">import React from &#39;react&#39;;
+
+function MyFunctionComponent() {
+  return &lt;h1&gt;Hello from a function component!&lt;/h1&gt;;
+}
+
+class MyClassComponent extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello from a class component!&lt;/h1&gt;;
+  }
+}
+</code></pre>
+<h2 is-upgraded>React Component Base Class</h2>
+<p>React class components need to inherit from the <code>React.Component</code> base class and have a <code>render()</code> method. Other than that, they follow regular JavaScript class syntax.</p>
+<p>This example shows a simple React class component.</p>
+<pre><code language="language-js" class="language-js">class MyComponent extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello world!&lt;/h1&gt;;
+  }
+}
+</code></pre>
+<p>React class components must have a <code>render()</code> method. This method should return some React elements created with JSX.</p>
+<p>To define a class component, you use the syntax class MyComponent extends Component. &#34;Extending&#34; the Component class provided by React is what makes the class a React Component, rather than just a plain JavaScript class.</p>
+<p>You also have to define a <code>render</code> method inside the class, which will be used by React to actually render the component.</p>
+<h2 is-upgraded>What is a functional component?</h2>
+<p>What about functional components? Well, you just have to define a function with a name beginning by an uppercase letter and React will know it&#39;s a function component!</p>
+<p>As to how to define the function, you have the choices JavaScript gives you. So you can define it using the function keyword:</p>
+<pre><code language="language-js" class="language-js">function MyComponent(props) {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p>But you can also use an arrow function if you want!</p>
+<pre><code language="language-js" class="language-js">const MyComponent = (props) =&gt;; {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Hello, world!&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}
+
+</code></pre>
+<p>One specificity of functional components is that you&#39;re using hooks to manage things from state, to lifecycle, to references, and more.</p>
+<h2 is-upgraded>JSX Capitalization</h2>
+<p>React requires that the first letter of components be capitalized. JSX will use this capitalization to tell the difference between an HTML tag and a component instance. If the first letter of a name is capitalized, then JSX knows it&#39;s a component instance; if not, then it&#39;s an HTML element.</p>
+<pre><code language="language-js" class="language-js">// This is considered a component by React.
+&lt;ThisComponent /&gt;
+  
+// This is considered a JSX HTML tag. 
+&lt;div&gt;
+</code></pre>
+<h2 is-upgraded><code>ReactDOM.render()</code></h2>
+<p><code>ReactDOM.render()</code>‘s first argument is a component instance. It will render that component instance.</p>
+<p>In this example, we will render an instance of <code>MyComponent</code>.</p>
+<pre><code language="language-js" class="language-js">import React from &#39;react&#39;;
+import ReactDOM from &#39;react-dom&#39;;
+
+class MyComponent extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello world!&lt;/h1&gt;;
+  }
+}
+
+// We won&#39;t write this line it will be handled by our app structure
+ReactDOM.render(&lt;MyComponent /&gt;, document.getElementById(&#39;app&#39;));
+</code></pre>
+<h2 is-upgraded>Code in <code>render()</code></h2>
+<p>A React component can contain JavaScript before any JSX is returned. The JavaScript before the <code>return</code> statement informs any logic necessary to render the component.</p>
+<p>In the example code, we see JavaScript prior to the <code>return</code> statement which rounds the <code>value</code> to an integer.</p>
+<pre><code language="language-js" class="language-js">class Integer extends React.Component {
+  render() {
+    const value = 3.14;
+    const asInteger = Math.round(value);
+    return &lt;p&gt;{asInteger}&lt;/p&gt;;
+  }
+}
+</code></pre>
+<h2 is-upgraded>Object Properties As Attribute Values</h2>
+<p>In React, JSX attribute values can be set through data stored in regular JavaScript objects. Look at the example block of code.</p>
+<pre><code language="language-js" class="language-js">const employee = {
+  name:
+    &#39;Hakam&#39;,
+  age: 30,
+  address: &#39;Dubai&#39;,
+};
+
+class EmployeeProfile extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;Profile&lt;/h1&gt;
+        &lt;p&gt;{employee.name}&lt;/p&gt;
+        &lt;p&gt;{employee.age}&lt;/p&gt;
+        &lt;p&gt;{employee.address}&lt;/p&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Props" duration="0">
+        <p>React class components can access their props with the <code>this.props</code> object.</p>
+<p>In the example code below, we see the <code><Hello></code> component being rendered with a <code>firstName</code> prop. It is accessed in the component&#39;s <code>render()</code> method with <code>this.props.firstName</code>.</p>
+<p>This should render the text &#34;Hi there, Hakam!&#34;</p>
+<h3 is-upgraded>Class component</h3>
+<pre><code language="language-js" class="language-js">class Hello extends React.Component {
+  render() {
+    return &lt;h1&gt;Hi there, {this.props.firstName}!&lt;/h1&gt;;
+  }
+}
+</code></pre>
+<h3 is-upgraded>Function component</h3>
+<pre><code language="language-js" class="language-js">const Hello = (props) =&gt;; {
+  return (
+    &lt;h1&gt;Hi there, {this.props.firstName}!&lt;/h1&gt;
+  );
+}
+
+// To use the component
+&lt;Hello firstName=&#34;Hakam&#34; /&gt;
+</code></pre>
+<h2 is-upgraded>Default props</h2>
+<p>A React component&#39;s defaultProps object contains default values to be used in case props are not passed. If a prop is not passed to a component, then it will be replaced with the value in the defaultProps object.</p>
+<p>In the example code, defaultProps is set so that profiles have a fallback profile picture if none is set. The  component should render two profiles: one with a set profile picture and one with the fallback profile picture.</p>
+<pre><code language="language-js" class="language-js">class Profile extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;img src={this.props.profilePictureSrc} alt=&#34;&#34; /&gt;
+        &lt;h2&gt;{this.props.name}&lt;/h2&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+
+Profile.defaultProps = {
+  profilePictureSrc: &#39;https://example.com/no-profile-picture.jpg&#39;,
+};
+
+class MyFriends extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        &lt;h1&gt;My friends&lt;/h1&gt;
+        &lt;Profile
+          name=&#34;Jane Doe&#34;
+          profilePictureSrc=&#34;https://example.com/jane-doe.jpg&#34;
+        /&gt;
+        &lt;Profile name=&#34;John Smith&#34; /&gt;
+      &lt;/div&gt;
+    );
+  }
+}
+</code></pre>
+<h2 is-upgraded><code>this.props.children</code></h2>
+<p>Every component&#39;s props object has a property named children. Using this.props.children will return everything in between a component&#39;s opening and closing JSX tags.</p>
+<pre><code language="language-js" class="language-js">&lt;List&gt;  // opening tag
+  &lt;li&gt;&lt;/li&gt; // child 1
+  &lt;li&gt;&lt;/li&gt; // child 2
+  &lt;li&gt;&lt;/li&gt; // child 3
+&lt;/List&gt; // closing tag
+</code></pre>
+<h2 is-upgraded>Another example</h2>
+<p>React component receives props. As we mentioned already there is no any strict rule about what these props are. We may even pass other components.</p>
+<pre><code language="language-js" class="language-js">const Title = function () {
+  return &lt;h1&gt;Hello there!&lt;/h1&gt;;
+}
+const Header = function ({ title, children }) {
+  return (
+    &lt;header&gt;
+      { title }
+      { children }
+    &lt;/header&gt;
+  );
+}
+function App() {
+  return (
+    &lt;Header title={ &lt;Title /&gt; }&gt;
+      &lt;Navigation /&gt;
+    &lt;/Header&gt;
+  );
+};
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="States" duration="0">
+        <h2 is-upgraded>Rendering initial state:</h2>
+<pre><code language="language-js" class="language-js">import React, { useState } from &#39;react&#39;;
+
+export default function Funktion() {
+  const initialState = {
+    count: 0,
+  };
+  const [state] = useState(initialState);
+  return &lt;button&gt;{state.count}&lt;/button&gt;;
+}
+</code></pre>
+<h2 is-upgraded>Updating state:</h2>
+<pre><code language="language-js" class="language-js">import React, { useState } from &#39;react&#39;;
+
+export default function Funktion() {
+  const initialState = {
+    count: 0,
+  };
+  const [state, setState] = useState(initialState);
+  function handleClick() {
+    setState({
+      count: state.count + 1,
+    });
+  }
+  return &lt;button onClick={handleClick}&gt;{state.count}&lt;/button&gt;;
+}
+</code></pre>
+<p>There can be multiple <code>useState</code> hooks in a function.</p>
+<p>The initial state passed to <code>useState</code> doesn&#39;t have to be an object:</p>
+<pre><code language="language-js" class="language-js">import React, { useState } from &#39;react&#39;;
+
+export default function Funktion() {
+  const initialCount = {
+    count: 0,
+  };
+  const [count, setCount] = useState(initialCount);
+  function handleClick() {
+    setCount(count + 1);
+  }
+  return &lt;button onClick={handleClick}&gt;{count}&lt;/button&gt;;
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Hooks" duration="0">
+        <h2 is-upgraded>Function Components</h2>
+<p>In React, you can use a function as a component instead of a class. Function components receive <code>props</code> as a parameter.</p>
+<p>In the example code, we show two equivalent components: one as a class and one as a function.</p>
+<pre><code language="language-js" class="language-js">// The two components below are equivalent.
+class GreeterAsClass extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello, {this.props.name}!&lt;/h1&gt;;
+  }
+}
+
+function GreeterAsFunction(props) {
+  return &lt;h1&gt;Hello, {props.name}!&lt;/h1&gt;;
+}
+</code></pre>
+<h2 is-upgraded>Why Hooks?</h2>
+<p>Hooks are functions that let us &#34;hook into&#34; state and lifecycle functionality in function components.</p>
+<p>Hooks allow us to:</p>
+<ul>
+<li>reuse stateful logic between components</li>
+<li>simplify and organize our code to separate concerns, rather allowing unrelated data to get tangled up together</li>
+<li>avoid confusion around the behavior of the <code>this</code> keyword</li>
+<li>avoid class constructors, binding methods, and related advanced JavaScript techniques</li>
+</ul>
+<h2 is-upgraded>Rules for Using Hooks</h2>
+<p>There are two main rules to keep in mind when using Hooks:</p>
+<ol type="1">
+<li>Only call Hooks from React function components.</li>
+<li>Only call Hooks at the top level, to be sure that Hooks are called in the same order each time a component renders.</li>
+</ol>
+<p>Common mistakes to avoid are calling Hooks inside of loops, conditions, or nested functions.</p>
+<pre><code language="language-js" class="language-js">// Instead of confusing React with code like this:
+if (userName !== &#39;&#39;) {
+ useEffect(() =&gt; {
+   localStorage.setItem(&#39;savedUserName&#39;, userName);
+ });
+}
+
+// We can accomplish the same goal, while consistently calling our Hook every time:
+useEffect(() =&gt; {
+ if (userName !== &#39;&#39;) {
+   localStorage.setItem(&#39;savedUserName&#39;, userName);
+ }
+});
+</code></pre>
+<h2 is-upgraded>The State Hook</h2>
+<p>The <code>useState()</code> Hook lets you add React state to function components. It should be called at the top level of a React function definition to manage its state.</p>
+<p><code>initialState</code> is an optional value that can be used to set the value of <code>currentState</code> for the first render. The <code>stateSetter</code> function is used to update the value of <code>currentState</code> and rerender our component with the next state value.</p>
+<pre><code language="language-js" class="language-js">const [currentState, stateSetter] = useState(initialState);
+</code></pre>
+<h2 is-upgraded>State Setter Callback Function</h2>
+<p>When the previous state value is used to calculate the next state value, pass a function to the state setter. This function accepts the previous value as an argument and returns an updated value.</p>
+<p>If the previous state is not used to compute the next state, just pass the next state value as the argument for the state setter.</p>
+<pre><code language="language-js" class="language-js">function Counter({ initialCount }) {
+ const [count, setCount] = useState(initialCount);
+ return (
+   &lt;div&gt;
+     Count: {count}
+     &lt;button onClick={() =&gt; setCount(initialCount)}&gt;Reset&lt;/button&gt;
+     &lt;button onClick={() =&gt; setCount((prevCount) =&gt; prevCount - 1)}&gt;-&lt;/button&gt;
+     &lt;button onClick={() =&gt; setCount((prevCount) =&gt; prevCount + 1)}&gt;+&lt;/button&gt;
+   &lt;/div&gt;
+ );
+}
+</code></pre>
+<h2 is-upgraded>Multiple State Hooks</h2>
+<p><code>useState()</code> may be called more than once in a component. This gives us the freedom to separate concerns, simplify our state setter logic, and organize our code in whatever way makes the most sense to us!</p>
+<pre><code language="language-js" class="language-js">function App() {
+ const [sport, setSport] = useState(&#39;basketball&#39;);
+ const [points, setPoints] = useState(31);
+ const [hobbies, setHobbies] = useState([]);
+}
+</code></pre>
+<h2 is-upgraded>Side Effects</h2>
+<p>The primary purpose of a React component is to return some JSX to be rendered. Often, it is helpful for a component to execute some code that performs side effects in addition to rendering JSX.</p>
+<p>In class components, side effects are managed with lifecycle methods. In function components, we manage side effects with the Effect Hook. Some common side effects include: fetching data from a server, subscribing to a data stream, logging values to the console, interval timers, and directly interacting with the DOM.</p>
+<h2 is-upgraded>The Effect Hook</h2>
+<p>After importing <code>useEffect()</code> from the <code>'react'</code> library, we call this Hook at the top level of a React function definition to perform a side effect. The callback function that we pass as the first argument of <code>useEffect()</code> is where we write whatever JavaScript code that we&#39;d like React to call after each render.</p>
+<pre><code language="language-js" class="language-js">import React, { useState, useEffect } from &#39;react&#39;;
+ 
+function TitleCount() {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() =&gt; {
+    document.title = `You clicked ${count} times`;
+  }, [count]);
+  
+  return &lt;button onClick={(prev) =&gt; setCount(prev + 1)}&gt;+&lt;/button&gt;;
+}
+</code></pre>
+<h2 is-upgraded>Effect Cleanup Functions</h2>
+<p>The cleanup function is optionally returned by the first argument of the Effect Hook.</p>
+<p>If the effect does anything that needs to be cleaned up to prevent memory leaks, then the effect returns a cleanup function. The Effect Hook will call this cleanup function before calling the effect again as well as when the component is being unmounted from the DOM.</p>
+<pre><code language="language-js" class="language-js">useEffect(() =&gt; {
+  document.addEventListener(&#39;keydown&#39;, handleKeydown);
+  return () =&gt; document.removeEventListener(&#39;keydown&#39;, handleKeydown);
+});
+</code></pre>
+<h2 is-upgraded>Multiple Effect Hooks</h2>
+<p><code>useEffect()</code> may be called more than once in a component. This gives us the freedom to individually configure our dependency arrays, separate concerns, and organize our code in whatever way makes the most sense to us!</p>
+<pre><code language="language-js" class="language-js">function App(props) {
+ const [title, setTitle] = useState(&#39;&#39;);
+ useEffect(() =&gt; {
+   document.title = title;
+ }, [title]);
+ 
+ const [time, setTime] = useState(0);
+ useEffect(() =&gt; {
+   const intervalId = setInterval(() =&gt; setTime((prev) =&gt; prev + 1), 1000);
+   return () =&gt; clearInterval(intervalId);
+ }, []);
+  
+ // ...
+}
+</code></pre>
+<h2 is-upgraded>Effect Dependency Array</h2>
+<p>The dependency array is used to tell the <code>useEffect()</code> method when to call our effect.</p>
+<p>By default, with no dependency array provided, our effect is called after every render. An empty dependency array signals that our effect never needs to be re-run. A non-empty dependency array signals to the Effect Hook that it only needs to call our effect again when the value of one of the listed dependencies has changed.</p>
+<pre><code language="language-js" class="language-js">useEffect(() =&gt; {
+ alert(&#39;called after every render&#39;);
+});
+ 
+useEffect(() =&gt; {
+ alert(&#39;called after first render&#39;);
+}, []);
+ 
+useEffect(() =&gt; {
+ alert(&#39;called when value of `endpoint` or `id` changes&#39;);
+}, [endpoint, id]);
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Controlled vs. Uncontrolled Form Fields" duration="0">
+        <p>In React, form fields are considered either uncontrolled, meaning they maintain their own state, or controlled, meaning that some parent maintains their state and passes it to them to display. Usually, the form fields will be controlled.</p>
+<p>The example code shows an uncontrolled and controlled input.</p>
+<pre><code language="language-js" class="language-js">const uncontrolledInput = &lt;input /&gt;;
+
+const controlledInput = (
+  &lt;input value={this.state.value} onChange={this.handleInputChange} /&gt;
+);
+</code></pre>
+<h2 is-upgraded>Controlled Components</h2>
+<p>A controlled form element in React is built with a change handler function and a value attribute.</p>
+<pre><code language="language-js" class="language-js">const controlledInput = (
+  &lt;input value={this.state.value} onChange={this.handleInputChange} /&gt;
+);
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

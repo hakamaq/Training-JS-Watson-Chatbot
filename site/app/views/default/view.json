@@ -2,7 +2,7 @@
   "title": "IBM Aramco Developer Training",
   "description": "These codelabs material This site provides tutorials that give a guided, hands-on experience during our training. Each codelab is split into the day and the topic covered. By the end of the course you will learn through each step how to create a chatbot in nodeJs, express, angular and save logs in mongodb.",
   "tags": [],
-  "categories": ["NodeJs", "Javascript", "Express", "Websockets", "MongoDB", "Angular", "MEAN"],
+  "categories": ["NodeJs", "Javascript", "Express", "Websockets", "MongoDB", "Angular", "MEAN", "React"],
   "exclude": [
     "^lang-.*"
   ],

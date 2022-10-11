@@ -32,13 +32,13 @@ module.exports = { retrieveSession}
 //const session = require("./retrieveSession.js")
 
 // exports
-export const retrieveSession = () => { console.log("retrieve")}
+export const retrieveSession2 = () => { console.log("retrieve")}
 
 //import to another file
-import { retrieveSession } from "./retrieveSession.js"
+import { retrieveSession2 } from "./retrieveSession.js"
 
 
-const retrieveSession = () => { console.log("retrieve")}
+const retrieveSession2 = () => { console.log("retrieve")}
 
 
 // greeting.js
@@ -68,16 +68,15 @@ waitingSavingDatabase
   console.log("value", value)
   return "hel"
 })
-.then()
 .catch((err) =>{ console.log("error", err)})
+//////////
 async function getUsers(){
   try{
     const result = await waitingSavingDatabase
     console.log("I'm inside the try block")
   }catch(err){
-    
+    console.log("Error in try")
   }
-  
 }
 
 /// METHOD 2

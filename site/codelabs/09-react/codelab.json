@@ -1,0 +1,23 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-10-10T07:12:48+03:00",
+  "id": "09-react",
+  "duration": 0,
+  "title": "React",
+  "authors": "Hakam Abdelqader",
+  "summary": "React introduction",
+  "source": "README.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "react"
+  ],
+  "tags": [],
+  "feedback": "mailto:hakam.abdelqader@ibm.com",
+  "url": "09-react"
+}

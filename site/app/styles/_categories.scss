@@ -86,6 +86,7 @@ $color-websockets-grey: #000000;
 @include codelab-card([ "nodejs", "NodeJs", "NodeJS" ], $color-google-green, "nodejs.svg");
 @include codelab-card([ "mongodb", "MongoDB", "mongoDB" ], $color-google-green, "mongo-db.svg");
 @include codelab-card([ "mean" ], $color-ar-core-purple, "mean.png");
+@include codelab-card([ "react" ], $color-react-grey, "react.svg");
 
 /* Actual CSS classes */
 
